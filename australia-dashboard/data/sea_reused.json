@@ -1,0 +1,146 @@
+[
+ {
+  "id": "cap_jakarta",
+  "name": "Jakarta (capital, Indonesia)",
+  "lat": -6.2088,
+  "lon": 106.8456,
+  "cat": "capital",
+  "note": "Capital of Indonesia.",
+  "source": "public information",
+  "aliases": [
+   "jakarta"
+  ]
+ },
+ {
+  "id": "cap_dili",
+  "name": "Dili (capital, Timor-Leste)",
+  "lat": -8.5569,
+  "lon": 125.5603,
+  "cat": "capital",
+  "note": "Capital of Timor-Leste (East Timor).",
+  "source": "public information",
+  "aliases": [
+   "dili"
+  ]
+ },
+ {
+  "id": "surabaya_sub",
+  "name": "Surabaya (East Java): Indonesian Navy 2nd Fleet and submarine base",
+  "lat": -7.2575,
+  "lon": 112.7521,
+  "cat": "submarine_base",
+  "note": "Home port of the Type 209 boats KRI Nagapasa, KRI Ardadedali and KRI Alugoro; the 2nd Fleet Command is based here (Wikipedia). Position approximate.",
+  "source": "Wikipedia (KRI Ardadedali; KRI Alugoro)",
+  "aliases": [
+   "surabaya"
+  ]
+ },
+ {
+  "id": "pt_pal",
+  "name": "PT PAL Indonesia shipyard (Surabaya): builds two Scorpene Evolved submarines",
+  "lat": -7.22,
+  "lon": 112.745,
+  "cat": "defense_industry",
+  "note": "State shipbuilder. First steel was cut on 7 Aug 2026 for the lead Scorpene Evolved boat; the Navy expects delivery in 2032-33 (Antara; Navy Leaders). Naval Group provides design support. Position approximate.",
+  "source": "Antara (Aug 2026); Navy Leaders (Aug 2026); Army Recognition (Aug 2026)",
+  "aliases": [
+   "pt pal indonesia shipyard"
+  ]
+ },
+ {
+  "id": "halim_afb",
+  "name": "Halim Perdanakusuma Air Force Base (Jakarta): National Air Operations Command",
+  "lat": -6.2661,
+  "lon": 106.8922,
+  "cat": "air_base",
+  "note": "National Air Operations Command (Koopsudnas) is headquartered here. The base hosts transport and VIP squadrons; the civil airport shares the runway (Global Military, Aug 2026; Wikipedia).",
+  "source": "Global Military (Aug 2026); Wikipedia (Halim Perdanakusuma International Airport)",
+  "aliases": [
+   "halim perdanakusuma air force base"
+  ]
+ },
+ {
+  "id": "iswahjudi_afb",
+  "name": "Iswahjudi Air Force Base (Maospati, East Java): fighter base, 32nd Air Wing",
+  "lat": -7.6158,
+  "lon": 111.4341,
+  "cat": "air_base",
+  "note": "Home to the 32nd Air Wing and four other units (ICAO WARI; Global Military, Aug 2026).",
+  "source": "Global Military (Aug 2026)",
+  "aliases": [
+   "iswahjudi air force base"
+  ]
+ },
+ {
+  "id": "hasanuddin_afb",
+  "name": "Sultan Hasanuddin Air Force Base (Makassar): 33rd Air Wing, Su-27/Su-30",
+  "lat": -5.0616,
+  "lon": 119.554,
+  "cat": "air_base",
+  "note": "Su-30MK2 overran the runway on 24 Aug 2026 during a simulated take-off after a major overhaul; the crew was unhurt (migflug, 2026). Position approximate.",
+  "source": "migflug (Aug 2026); Wikipedia (Sultan Hasanuddin International Airport)",
+  "aliases": [
+   "sultan hasanuddin air force base"
+  ]
+ },
+ {
+  "id": "manuhua_afb",
+  "name": "Manuhua Air Force Base (Biak, Papua): 13th Air Wing; 27th Air Squadron (CN235)",
+  "lat": -1.19,
+  "lon": 136.108,
+  "cat": "air_base",
+  "note": "ICAO WABB; runway 11/29, 3,571 m (migflug, 2026; Wikipedia). Position approximate.",
+  "source": "migflug (2026); Wikipedia (Indonesian Air Force)",
+  "aliases": [
+   "manuhua air force base"
+  ]
+ },
+ {
+  "id": "raden_sadjad_afb",
+  "name": "Raden Sadjad Air Force Base (Ranai, Natuna Islands)",
+  "lat": 3.926,
+  "lon": 108.387,
+  "cat": "air_base",
+  "note": "ICAO WIDO; runway 18/36, 2,560 m (Wikipedia, Indonesian Air Force listing). The Natuna Islands face the South China Sea. Position approximate.",
+  "source": "Wikipedia (Indonesian Air Force)",
+  "aliases": [
+   "raden sadjad air force base"
+  ]
+ },
+ {
+  "id": "sunda",
+  "name": "Sunda Strait (Java-Sumatra)",
+  "lat": -6.05,
+  "lon": 105.8,
+  "cat": "chokepoint",
+  "note": "Strait between Java and Sumatra (public information). Not verified in this build.",
+  "source": "public information (not verified in this build)",
+  "aliases": [
+   "sunda strait"
+  ]
+ },
+ {
+  "id": "lombok",
+  "name": "Lombok Strait (Bali-Lombok)",
+  "lat": -8.78,
+  "lon": 115.75,
+  "cat": "chokepoint",
+  "note": "Deep-water route between the Java Sea and the Indian Ocean (public information). Not verified in this build.",
+  "source": "public information (not verified in this build)",
+  "aliases": [
+   "lombok strait"
+  ]
+ },
+ {
+  "id": "makassar",
+  "name": "Makassar Strait (Borneo-Sulawesi)",
+  "lat": -2.0,
+  "lon": 118.5,
+  "cat": "chokepoint",
+  "note": "Strait between Borneo and Sulawesi (public information). Not verified in this build.",
+  "source": "public information (not verified in this build)",
+  "aliases": [
+   "makassar strait"
+  ]
+ }
+]

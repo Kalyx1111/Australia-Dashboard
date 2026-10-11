@@ -1,0 +1,7 @@
+flask
+requests
+requests[socks]
+feedparser
+cryptography
+waitress
+shapely

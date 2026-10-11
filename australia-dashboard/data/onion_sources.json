@@ -1,0 +1,4 @@
+{
+  "_note": "Dark-web RSS sources, fetched only through Tor (Tor Browser open, or the Tor service running). Add ONLY onion addresses you verified on the outlet's own official website - fake onion lookalikes are common. A v3 onion address is 56 characters (a-z, 2-7) followed by .onion; anything else is rejected. Example shape: {\"name\": \"Outlet name\", \"url\": \"http://<56-char-address>.onion/feed.xml\", \"type\": \"rss\"}",
+  "sources": []
+}

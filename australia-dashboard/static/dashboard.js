@@ -1,0 +1,616 @@
+
+(function(){
+  "use strict";
+
+  const PROJ = {"type": "laea", "lam0": 2.6179938779914944, "phi0": -0.4363323129985824, "sinp0": -0.42261826174069944, "cosp0": 0.9063077870366499, "n": 0, "F": 0, "rho0": 0, "scale": 753.962950696963, "translate": [606.9324331998605, 540.0866852457565], "width": 1300, "height": 1043};
+  const HEADING_KEYS = ["geo", "milops", "arms", "naval", "scs", "air", "space", "tech", "cyber", "econ", "mss", "social", "wellbeing", "hazard"];
+  const SEED_DATA = {"updated_at": "offline-snapshot", "items_by_category": {"milops": [{"category": "milops", "label": "Indonesia's military build-up in Papua: two new regional commands planned for 2026", "text": "Indonesia plans two new regional military commands in 2026, one at Nabire in Central Papua and one at Sorong in Southwest Papua. About 83,000 soldiers and police are reported in the six Papuan provinces (Project Multatuli, 2026). Local groups and the TPNPB say this deepens the conflict.", "source": "Project Multatuli (2026); Asia Pacific Report (Sep 2026)", "date": "2026", "url": null, "connector": "reference"}, {"category": "milops", "label": "West Papua: more than 125,000 reported displaced (September 2026)", "text": "Indonesian security forces are fighting the TPNPB in the mountainous interior of Papua. More than 125,000 people are reported displaced, though the true number is probably higher. In April 2025, an attack attributed to the TPNPB killed 15 to 17 gold miners in Yahukimo.", "source": "Asia Pacific Report (25 Sep 2026); Wikipedia (Yahukimo massacre; TPNPB)", "date": "2025-2026", "url": null, "connector": "reference"}], "naval": [{"category": "naval", "label": "AUKUS: submarine rotations at HMAS Stirling from 2027; US Naval Support Activity Stirling set up (May 2026)", "text": "Submarine Rotational Force-West (SRF-West) brings one UK and up to four US nuclear-powered submarines to HMAS Stirling from 2027. The US Navy set up Naval Support Activity Stirling as of 30 May 2026, and US Submarine Squadron 3 is being re-established, with a lead US maintenance activity from mid-2026.", "source": "Australian Submarine Agency; MilitarySpot (8 Jun 2026); Defence Connect (15 Jun 2026)", "date": "May-Jun 2026", "url": null, "connector": "reference"}, {"category": "naval", "label": "Enduring US access to HMAS Stirling confirmed (August 2026)", "text": "Australia confirmed that US attack submarines will keep enduring access to HMAS Stirling under SRF-West. This resolves uncertainty over whether the American presence would end after the first five-year period from 2027. Australia's government says it has no foreign bases, a position the arrangement is designed to keep.", "source": "Naval News / Army Recognition (9 Aug 2026)", "date": "Aug 2026", "url": null, "connector": "reference"}, {"category": "naval", "label": "HMAS Stirling supports six Collins-class submarines and four Anzac frigates", "text": "The naval base on Garden Island, Western Australia, supports all six Collins-class submarines and four Anzac-class frigates. The first submarine assigned permanently to Stirling was HMAS Oxley in 1987, and the Australian Submarine Squadron headquarters moved there in 1994.", "source": "Naval News / Army Recognition (9 Aug 2026)", "date": "2026", "url": null, "connector": "reference"}, {"category": "naval", "label": "Henderson Defence Precinct and Osborne: the AUKUS shipbuilding sites (26 August 2026)", "text": "The Henderson Defence Precinct site and boundary in Western Australia were announced on 26 August 2026. Osborne in South Australia will be the centre of construction for SSN-AUKUS nuclear-powered submarines, and HMAS Stirling will be the operating base for in-water maintenance.", "source": "Australian Submarine Agency (26 Aug 2026)", "date": "Aug 2026", "url": null, "connector": "reference"}, {"category": "naval", "label": "Lombrum: Australian-funded upgrade and US access; PNG says it is not a foreign base (June 2026)", "text": "Australia funded an upgrade of the Lombrum naval base on Manus Island for the PNG Defence Force (reported at about A$500 million). Under the 2023 Defense Cooperation Agreement, the US can access the base. PNG's prime minister says Lombrum is not a foreign base.", "source": "PINA (2 Jun 2026); Wikipedia (Lombrum Naval Base); GlobalSecurity", "date": "Jun 2026", "url": null, "connector": "reference"}], "air": [{"category": "air", "label": "US B-52H bombers land at RAAF Base Tindal (1 September 2026)", "text": "B-52H Stratofortress bombers of the 2nd Bomb Wing from Barksdale Air Force Base landed at RAAF Base Tindal near Katherine on 1 September 2026, for Bomber Task Force 26-3. Tindal is also home to No. 75 Squadron's F-35A fighters and MQ-4C Triton drones.", "source": "Air & Space Forces; Army Recognition (Sep 2026); migflug (Sep 2026)", "date": "Sep 2026", "url": null, "connector": "reference"}, {"category": "air", "label": "Andersen Air Force Base (Guam): America's bomber hub in the Western Pacific", "text": "Andersen Air Force Base on Guam is the current US bomber hub in the Western Pacific. Bomber Task Force deployments to Tindal are presented as a way of spreading that capacity across an allied network.", "source": "migflug (Sep 2026); Air & Space Forces (Sep 2026)", "date": "2026", "url": null, "connector": "reference"}, {"category": "air", "label": "Exercise Pitch Black: the biennial RAAF exercise at Darwin and Tindal (2026 edition)", "text": "Exercise Pitch Black is a biennial warfare exercise hosted by the RAAF, normally held at RAAF Bases Darwin and Tindal. It has included forces from several partner nations, including France, Malaysia, Singapore, Thailand and the US. The 2026 edition is listed in August 2026 reporting.", "source": "Wikipedia (Exercise Pitch Black; updated Aug 2026)", "date": "2026", "url": null, "connector": "reference"}], "arms": [{"category": "arms", "label": "Tindal: the US does not say whether bombers carry nuclear weapons, and Australia does not ask", "text": "Under the arrangement between the two governments, the US will not tell Australia whether B-52 bombers are carrying nuclear weapons when they land at RAAF Base Tindal, and the Australian government will not ask. The A$1.1bn upgrade of the base is US-funded; its scope was confirmed in October 2022.", "source": "Wikipedia (RAAF Base Tindal)", "date": "2020-2022", "url": null, "connector": "reference"}, {"category": "arms", "label": "The Woomera Range Complex: Australia's defence test range, about 122,000 km²", "text": "The RAAF Woomera Range Complex is the Australian Defence Force's test and evaluation range, covering about 122,000 km², with restricted airspace. It is run by the Air Warfare Centre from RAAF Base Edinburgh. Its Launch Area 5 hosted British rocket launches from 1958 to 1971.", "source": "Wikipedia (RAAF Woomera Range Complex; Woomera Launch Area 5; RAAF Base Woomera)", "date": "2026", "url": null, "connector": "reference"}, {"category": "arms", "label": "Kwajalein: the Ronald Reagan test range was renamed in 2026", "text": "The Reagan test site on Kwajalein Atoll in the Marshall Islands, run by the US Army, was renamed the Ronald Reagan Space and Missile Test Range in 2026. It was previously the Ronald Reagan Ballistic Missile Defense Test Site (1999-2026).", "source": "Wikipedia (Ronald Reagan Space and Missile Test Range); DVIDS (20 Apr 2026)", "date": "Apr 2026", "url": null, "connector": "reference"}, {"category": "arms", "label": "OPAL reactor: 98.3% of scheduled operating time in 2025-26; no electricity generation", "text": "ANSTO's OPAL reactor at Lucas Heights is a 20 MW research reactor using low-enriched uranium. It produces radioisotopes and neutron beams. In 2025-26 it operated 98.3% of its scheduled time. It cannot generate electricity.", "source": "ANSTO (OPAL, 2026)", "date": "2025-2026", "url": null, "connector": "reference"}, {"category": "arms", "label": "Nuclear power generation is currently illegal in Australia; uranium supplies about 8% of world demand", "text": "Australia has a large uranium industry supplying around 8% of global demand. Nuclear power generation is currently illegal in Australia, and a nuclear power plant would take about 10 to 15 years to build.", "source": "Nuclear Engineering International (special report)", "date": "2024-2025", "url": null, "connector": "reference"}, {"category": "arms", "label": "Napandee: the national radioactive waste facility plan was torn up after a Federal Court ruling", "text": "The Napandee site near Kimba in South Australia was declared the site of a national radioactive waste facility. A Federal Court ruling in favour of the Barngarla traditional owners tore up the plan. Most of Australia's radioactive waste remains stored at Lucas Heights.", "source": "ABC News (16 Jul 2024); Conservation Council SA (May 2022)", "date": "2022-2024", "url": null, "connector": "reference"}, {"category": "arms", "label": "Olympic Dam: 261,000 tonnes of contained uranium oxide; uranium is about 20% of revenue", "text": "The Olympic Dam copper, gold and uranium mine (BHP) holds 261,000 tonnes of contained uranium oxide, and about 20% of its revenue comes from uranium. Operating uranium mines are Olympic Dam, Beverley and Four Mile in South Australia; Ranger in the Northern Territory has closed.", "source": "World Nuclear Association (Australia's uranium mines)", "date": "2020-2026", "url": null, "connector": "reference"}], "cyber": [{"category": "cyber", "label": "Pine Gap: protests on 20 July 2026; the government says it is a joint facility", "text": "Protesters gathered at Pine Gap near Alice Springs on 20 July 2026, and the facility has been the centre of a public debate about its control. Ministers say the facility is truly joint and that half its personnel are Australian. Critics say about 10% of the staff are Australian government employees; the figures differ by source.", "source": "The Diplomat (Jul 2026); CounterPunch (24 Jul 2026); Declassified Australia (17 Jul 2026)", "date": "Jul 2026", "url": null, "connector": "reference"}, {"category": "cyber", "label": "North West Cape: a joint communications station with a significant US presence", "text": "The Naval Communication Station Harold E. Holt at North West Cape near Exmouth, Western Australia, is operated mainly by the Royal Australian Navy with a significant US presence, alongside the Shoal Bay and Kojarena satellite stations.", "source": "Operation Military Kids (2026); Wikipedia (JGGRS; Signals intelligence platforms)", "date": "2026", "url": null, "connector": "reference"}, {"category": "cyber", "label": "Perth subsea cable faults (8-9 August 2026): a suspicious vessel reported", "text": "Two cables in the Submarine Cable Protection Zone off Perth developed faults one after the other on 8-9 August 2026, and a vessel was reportedly observed nearby. The cause has not been confirmed in this build.", "source": "SpecialEurasia (11 Aug 2026)", "date": "Aug 2026", "url": null, "connector": "reference"}], "geo": [{"category": "geo", "label": "Vanuatu: the Nakamal Agreement with Australia signed on 29 June 2026", "text": "Australia and Vanuatu signed the Nakamal Agreement in Canberra. Reported as a watered-down A$500 million security deal, it followed about ten months of negotiation after Vanuatu's prime minister pulled out of an earlier signing. In a humanitarian disaster, Vanuatu will ask Australia, New Zealand or France first.", "source": "AAP via Islands Business (30 Jun 2026)", "date": "Jun 2026", "url": null, "connector": "reference"}, {"category": "geo", "label": "China-Solomon Islands security agreement (2022): visits and logistics, no declared base", "text": "The 2022 China-Solomon Islands security agreement allows Chinese naval ship visits for logistics and stopovers. The Solomon Islands prime minister says no PLA base will be allowed. The agreement's lack of transparency has raised regional concern, especially in Australia and the US.", "source": "Georgetown GJIA (2022); Pantheon Insights (2025)", "date": "2022", "url": null, "connector": "reference"}, {"category": "geo", "label": "Australia-PNG defence treaty: being finalised in 2025; status in 2026 not verified", "text": "Australia and Papua New Guinea were finalising a bilateral defence treaty in 2025. Australian officials described it as the most significant upgrade to the relationship since PNG's independence in 1975. Its 2026 status was not verified in this build.", "source": "ABC Pacific (2025); World Socialist Web Site (Sep 2025); not verified in this build", "date": "2025", "url": null, "connector": "reference"}, {"category": "geo", "label": "Bougainville: independence vote ratification debated in PNG Parliament (August 2026)", "text": "97.7% of Bougainvilleans voted for independence in the 2019 non-binding referendum. PNG's Parliament debated whether to ratify the result in August 2026. The autonomous government says it will declare independence in 2030 if the result is not ratified.", "source": "Asia Pacific Report (26 Aug 2026); bne IntelliNews (2026)", "date": "Aug 2026", "url": null, "connector": "reference"}, {"category": "geo", "label": "New Zealand: legislated nuclear-free zone (Nuclear Free Zone, Disarmament and Arms Control Act 1987)", "text": "New Zealand prohibits nuclear weapons and nuclear-powered vessels in its territory under a 1987 law. This is public information not verified in this build; check the current legislation.", "source": "Public information (not verified in this build)", "date": "1987", "url": null, "connector": "reference"}, {"category": "geo", "label": "Timor-Leste: an ASEAN member since 2025; Australia shares a maritime boundary treaty", "text": "Timor-Leste joined ASEAN as its newest member. Its maritime boundary with Australia and the Greater Sunrise gas field are covered by a treaty, which was not re-verified in this build.", "source": "IGC 2026 ASEAN background guide; not re-verified in this build", "date": "2025-2026", "url": null, "connector": "reference"}], "space": [{"category": "space", "label": "Koonibba: Australia's first Launch Facility Licence; 2026 re-entries and a DSTG mission", "text": "The Koonibba Test Range near Ceduna, South Australia, was granted Australia's first Launch Facility Licence. In 2026, Southern Launch recorded orbital re-entries W-5 and W-6, and flew a June 2026 mission for the Defence Science and Technology Group.", "source": "SpaceAustralia (2021); AeroVia (2026)", "date": "2021-2026", "url": null, "connector": "reference"}, {"category": "space", "label": "Rocket Lab's Māhia site: more than 80 launches; latest on 11 September 2026", "text": "Rocket Lab Launch Complex 1 on the Māhia Peninsula was the first private orbital spaceport. The last recorded launch was on 11 September 2026, and JAXA's Kakushin Rising launched from the site on 23 April 2026.", "source": "rocketlaunch.org (2026); Rocket Lab (launch list, 2026)", "date": "2026", "url": null, "connector": "reference"}, {"category": "space", "label": "Arnhem Space Centre: the first suborbital launch; the operator moved its headquarters to Adelaide", "text": "The Arnhem Space Centre near Nhulunbuy in East Arnhem Land, operated by Equatorial Launch Australia, has hosted suborbital sounding rocket launches. The operator opened its headquarters in Adelaide rather than Darwin.", "source": "Wikipedia (Arnhem Space Centre; 2026); NT Independent (2026)", "date": "2026", "url": null, "connector": "reference"}], "econ": [{"category": "econ", "label": "Gorgon LNG: Stage Three expected in 2026; the largest single resource project in Australia's history", "text": "The Chevron-operated Gorgon LNG project on Barrow Island has three LNG trains of 5.2 MTPA each and a domestic gas plant. Stage Three, with the Geryon and Eurytion fields, was expected to start production in 2026.", "source": "Chevron (fact sheet); Offshore Technology (2026)", "date": "2026", "url": null, "connector": "reference"}, {"category": "econ", "label": "Australia's LNG fleet: 10 plants and 85.1 MTPA of operating capacity (February 2026)", "text": "As of February 2026 Australia had 10 operating LNG plants with capacity of about 85.1 MTPA. One train at North West Shelf was idle, and about 5 MTPA was under construction.", "source": "SEALA AI (Feb 2026)", "date": "Feb 2026", "url": null, "connector": "reference"}], "hazard": [{"category": "hazard", "label": "Cyclone Narelle (March 2026): outages at Gorgon, Wheatstone, North West Shelf and Darwin LNG", "text": "Tropical Cyclone Narelle, a Category 3 storm, caused outages at Gorgon and Wheatstone LNG, reduced North West Shelf output from 16.9 to 14.3 MTPA after one train shut, and took Santos's Darwin LNG offline temporarily. Ichthys reported no damage.", "source": "Hydrocarbon Processing (Mar 2026)", "date": "Mar 2026", "url": null, "connector": "reference"}], "scs": [{"category": "scs", "label": "Torres Strait: the PNG-Australia maritime border and the Coral Sea-Arafura Sea route", "text": "The Torres Strait lies between Queensland and Papua New Guinea and connects the Coral Sea with the Arafura Sea. PNG determined the maritime border in the strait.", "source": "Wikipedia (Torres Strait); Anantam IAS (2026)", "date": "2026", "url": null, "connector": "reference"}, {"category": "scs", "label": "Lombok Strait: deep enough for a submarine to transit submerged (analysis)", "text": "Analysts describe the Lombok Strait as one of the few Indonesian passages deep enough for a submarine to transit submerged at operational depth. This is an analytical view rather than an official assessment.", "source": "Geopol analysis (2026)", "date": "2026", "url": null, "connector": "reference"}], "wellbeing": [{"category": "wellbeing", "label": "World Happiness Report 2026: ranks for Australia, New Zealand and the Pacific not verified in this build", "text": "The annual report ranks countries for wellbeing. The ranks for the countries in this frame were not verified in this build; check the report directly.", "source": "World Happiness Report (annual); not verified in this build", "date": "Mar 2026", "url": null, "connector": "reference"}], "darkweb": [{"category": "darkweb", "label": "Ransomware claims for the region are group claims, not confirmed victims", "text": "The Ransomware.live feed filtered to the region's country codes lists claims made by groups on their own leak sites. Each claim is labelled unverified.", "source": "Ransomware.live (v2 feed)", "date": "live", "url": null, "connector": "reference"}]}, "markers": [{"id": "cap_canberra", "name": "Canberra (capital, Australia)", "lat": -35.2809, "lon": 149.13, "cat": "capital", "note": "Seat of government. Australian Defence Headquarters and the Australian Signals Directorate are in the Canberra area (public information).", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_darwin", "name": "Darwin (capital, Northern Territory)", "lat": -12.4634, "lon": 130.8456, "cat": "capital", "note": "Territory capital. RAAF Base Darwin and the US Marine Rotational Force-Darwin are here (Wikipedia; Naval News, Aug 2026).", "source": "Wikipedia (Exercise Pitch Black); Naval News (Aug 2026)", "date": "", "linked_items": []}, {"id": "cap_hobart", "name": "Hobart (capital, Tasmania)", "lat": -42.8821, "lon": 147.3272, "cat": "capital", "note": "State capital of Tasmania (public information).", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_wellington", "name": "Wellington (capital, New Zealand)", "lat": -41.2865, "lon": 174.7762, "cat": "capital", "note": "Seat of government. The New Zealand Defence Force and the GCSB are headquartered here (public information).", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_port_moresby", "name": "Port Moresby (capital, Papua New Guinea)", "lat": -9.4438, "lon": 147.1803, "cat": "capital", "note": "Capital; the Papua New Guinea Defence Force headquarters is here (public information).", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_honiara", "name": "Honiara (capital, Solomon Islands)", "lat": -9.4456, "lon": 159.9729, "cat": "capital", "note": "Capital. The 2022 China-Solomon Islands security agreement concerns this government (see reference items).", "source": "Georgetown GJIA (2022); Pantheon Insights (2025)", "date": "", "linked_items": []}, {"id": "cap_port_vila", "name": "Port Vila (capital, Vanuatu)", "lat": -17.7333, "lon": 168.3273, "cat": "capital", "note": "Capital. The Nakamal Agreement with Australia was signed in Canberra on 29 June 2026 (AAP).", "source": "AAP via Islands Business (30 Jun 2026)", "date": "", "linked_items": []}, {"id": "cap_suva", "name": "Suva (capital, Fiji)", "lat": -18.1416, "lon": 178.4419, "cat": "capital", "note": "Capital. The Republic of Fiji Military Forces headquarters is in Suva (public information).", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_noumea", "name": "Nouméa (capital, New Caledonia; France)", "lat": -22.2758, "lon": 166.458, "cat": "capital", "note": "Capital of New Caledonia, a French territory. French armed forces are based here (public information).", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_apia", "name": "Apia (capital, Samoa)", "lat": -13.8333, "lon": 188.2667, "cat": "capital", "note": "Capital of Samoa.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_nukualofa", "name": "Nuku'alofa (capital, Tonga)", "lat": -21.1333, "lon": 184.8, "cat": "capital", "note": "Capital of Tonga.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_funafuti", "name": "Funafuti (capital, Tuvalu)", "lat": -8.5211, "lon": 179.1963, "cat": "capital", "note": "Capital of Tuvalu, a low-lying atoll state (public information).", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_yaren", "name": "Yaren (de facto capital, Nauru)", "lat": -0.5477, "lon": 166.9209, "cat": "capital", "note": "De facto capital of Nauru, which has no formal capital.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_tarawa", "name": "South Tarawa (capital, Kiribati)", "lat": 1.3278, "lon": 172.9784, "cat": "capital", "note": "Capital of Kiribati.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_majuro", "name": "Majuro (capital, Marshall Islands)", "lat": 7.1164, "lon": 171.1858, "cat": "capital", "note": "Capital. The Ronald Reagan test range on Kwajalein Atoll is in the same republic (see missile ranges).", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_palikir", "name": "Palikir (capital, Federated States of Micronesia)", "lat": 6.9248, "lon": 158.161, "cat": "capital", "note": "Capital of the Federated States of Micronesia.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_ngerulmud", "name": "Ngerulmud (capital, Palau)", "lat": 7.4961, "lon": 134.6249, "cat": "capital", "note": "Capital of Palau, which has a Compact of Free Association with the United States.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_hagatna", "name": "Hagåtña (capital, Guam; US territory)", "lat": 13.4443, "lon": 144.7937, "cat": "capital", "note": "Capital of Guam. Andersen Air Force Base and Naval Base Guam are on the island (see foreign bases).", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_saipan", "name": "Saipan (capital, Northern Mariana Islands; US)", "lat": 15.185, "lon": 145.75, "cat": "capital", "note": "Capital of the Northern Mariana Islands, a US Commonwealth.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_pago_pago", "name": "Pago Pago (capital, American Samoa; US)", "lat": -14.2756, "lon": 189.298, "cat": "capital", "note": "Capital of American Samoa, a US territory.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_avarua", "name": "Avarua (capital, Cook Islands; New Zealand)", "lat": -21.2078, "lon": 200.225, "cat": "capital", "note": "Capital of the Cook Islands, self-governing in free association with New Zealand.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_alofi", "name": "Alofi (capital, Niue; New Zealand)", "lat": -19.0544, "lon": 190.1323, "cat": "capital", "note": "Capital of Niue, self-governing in free association with New Zealand.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_mata_utu", "name": "Mata-Utu (capital, Wallis and Futuna; France)", "lat": -13.282, "lon": 183.8256, "cat": "capital", "note": "Capital of Wallis and Futuna, a French territory.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_kingston", "name": "Kingston (Norfolk Island; Australian territory)", "lat": -29.0565, "lon": 167.958, "cat": "capital", "note": "Administrative centre of Norfolk Island, an Australian external territory.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_flying_fish", "name": "Flying Fish Cove (Christmas Island; Australian territory)", "lat": -10.42, "lon": 105.6789, "cat": "capital", "note": "Settlement on Christmas Island, an Australian external territory.", "source": "public information", "date": "", "linked_items": []}, {"id": "pine_gap", "name": "Joint Defence Facility Pine Gap (Alice Springs, NT): US-Australian signals and satellite facility", "lat": -23.7985, "lon": 133.737, "cat": "foreign_base", "note": "Joint signals intelligence and satellite communications facility since 1966. About 700 military and civilian personnel (2019 count; Wikipedia). Operated by the Australian Signals Directorate with the US NSA, CIA and NRO (Wikipedia). Protests on 20 July 2026 (The Diplomat). Ministers say half the personnel are Australian; activists dispute this (Declassified Australia, Jul 2026). Position approximate.", "source": "Wikipedia (Signals intelligence platforms; Mount Zeil); The Diplomat (Jul 2026); Declassified Australia (Jul 2026)", "date": "", "linked_items": []}, {"id": "nw_cape", "name": "Harold E. Holt Naval Communication Station (North West Cape, Exmouth, WA): US-Australian communications station", "lat": -21.8167, "lon": 114.1667, "cat": "foreign_base", "note": "Operated mainly by the Royal Australian Navy with a significant US presence (Operation Military Kids, 2026; Wikipedia). Position approximate.", "source": "Operation Military Kids (2026); Wikipedia (Naval Communication Station Harold E. Holt)", "date": "", "linked_items": []}, {"id": "mrf_darwin", "name": "RAAF Base Darwin (Darwin, NT): US Marine Rotational Force-Darwin", "lat": -12.4081, "lon": 130.8795, "cat": "foreign_base", "note": "US Marines rotate through Darwin under the Marine Rotational Force-Darwin (Naval News, Aug 2026). RAAF Base Darwin and RAAF Base Tindal host Exercise Pitch Black (Wikipedia). Position approximate.", "source": "Naval News (Aug 2026); Wikipedia (Exercise Pitch Black)", "date": "", "linked_items": []}, {"id": "andersen", "name": "Andersen Air Force Base (Guam): America's bomber hub in the Western Pacific", "lat": 13.584, "lon": 144.93, "cat": "foreign_base", "note": "Bomber hub in the Western Pacific (migflug, Sep 2026). Position approximate.", "source": "migflug (Sep 2026)", "date": "", "linked_items": []}, {"id": "guam_navy", "name": "Naval Base Guam (Apra Harbor, Guam) (not verified in this build)", "lat": 13.442, "lon": 144.65, "cat": "foreign_base", "note": "Public information: US Navy base on Apra Harbor. Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "tindal", "name": "RAAF Base Tindal (near Katherine, NT): F-35A squadron; US B-52H bomber deployments", "lat": -14.5219, "lon": 132.378, "cat": "air_base", "note": "B-52H bombers of the 2nd Bomb Wing (Barksdale) arrived on 1 Sep 2026 for Bomber Task Force 26-3 (Air & Space Forces; Army Recognition, Sep 2026). The A$1.1bn upgrade is US-funded (Wikipedia). No. 75 Squadron flies the F-35A; MQ-4C Triton operates here (Wikipedia). Position approximate.", "source": "Air & Space Forces (Sep 2026); Army Recognition (Sep 2026); Wikipedia (RAAF Base Tindal)", "date": "", "linked_items": []}, {"id": "amberley", "name": "RAAF Base Amberley (Queensland): 82 Wing headquarters; 1 and 6 Squadrons", "lat": -27.6344, "lon": 152.7108, "cat": "air_base", "note": "Headquarters of 82 Wing; 1 and 6 Squadrons are based here (Air Combat Group, Wikipedia). US B-2 bombers deployed here in 2024 (Air & Space Forces). Position approximate.", "source": "Wikipedia (Air Combat Group RAAF); Air & Space Forces (2024)", "date": "", "linked_items": []}, {"id": "williamtown", "name": "RAAF Base Williamtown (NSW): F-35A 3 Squadron; 78 and 81 Wing headquarters", "lat": -32.7906, "lon": 151.8417, "cat": "air_base", "note": "Home of 3 Squadron (F-35A) and the 2 Operational Conversion Unit; 78 and 81 Wing headquarters (Air Combat Group, Wikipedia). Position approximate.", "source": "Wikipedia (Air Combat Group RAAF)", "date": "", "linked_items": []}, {"id": "pearce", "name": "RAAF Base Pearce (WA): 79 Squadron", "lat": -31.6728, "lon": 116.0175, "cat": "air_base", "note": "Home of 79 Squadron (Air Combat Group, Wikipedia). Position approximate.", "source": "Wikipedia (Air Combat Group RAAF)", "date": "", "linked_items": []}, {"id": "edinburgh", "name": "RAAF Base Edinburgh (Adelaide, SA): Air Warfare Centre headquarters", "lat": -34.7, "lon": 138.62, "cat": "air_base", "note": "Headquarters of the Air Warfare Centre; it manages the Woomera Range Complex (Wikipedia). Position approximate.", "source": "Wikipedia (RAAF Base Woomera)", "date": "", "linked_items": []}, {"id": "rnzaf_whenuapai", "name": "RNZAF Base Auckland (Whenuapai, NZ) (not verified in this build)", "lat": -36.7876, "lon": 174.6244, "cat": "air_base", "note": "Public information: principal air base of the RNZAF. Position approximate; not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "rnzaf_ohakea", "name": "RNZAF Base Ohakea (Manawatu, NZ) (not verified in this build)", "lat": -40.2, "lon": 175.39, "cat": "air_base", "note": "Public information: RNZAF base. Position approximate; not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "hmas_stirling", "name": "HMAS Stirling (Garden Island, WA): Fleet Base West and submarine base for AUKUS rotations", "lat": -32.25, "lon": 115.69, "cat": "submarine_base", "note": "Home of the six Collins-class submarines and of the Anzac-class frigates. Submarine Rotational Force-West (one UK and up to four US nuclear-powered submarines) from 2027. US Naval Support Activity Stirling was established on 30 May 2026; enduring US access was confirmed in August 2026 (ASA; Defence Connect, Jun 2026; Army Recognition, Aug 2026). Position approximate.", "source": "Australian Submarine Agency (SRF-West); Defence Connect (15 Jun 2026); MilitarySpot (8 Jun 2026); Army Recognition (9 Aug 2026)", "date": "", "linked_items": []}, {"id": "fleet_base_east", "name": "Fleet Base East (Garden Island, Sydney): Royal Australian Navy east-coast base", "lat": -33.843, "lon": 151.227, "cat": "navy_base", "note": "East-coast fleet base in Sydney (Royal Australian Navy material, via a secondary summary; the position was not independently verified in this build).", "source": "Royal Australian Navy (via secondary summary); partly verified in this build", "date": "", "linked_items": []}, {"id": "coonawarra", "name": "HMAS Coonawarra (Darwin, NT): Royal Australian Navy northern base (not verified in this build)", "lat": -12.45, "lon": 130.87, "cat": "navy_base", "note": "Public information: Royal Australian Navy base in Darwin. Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "lombrum", "name": "Lombrum Naval Base (Manus Island, PNG): PNG Defence Force base with Australian-funded upgrade and US access", "lat": -2.05, "lon": 147.26, "cat": "navy_base", "note": "Australian-funded upgrade (about A$500 million; PINA, Jun 2026). US access under the 2023 Defense Cooperation Agreement. PNG's prime minister says it is not a foreign base (PINA, 2 Jun 2026). Built by the US in 1944 (GlobalSecurity).", "source": "PINA (2 Jun 2026); GlobalSecurity (Lombrum); Wikipedia (Lombrum Naval Base)", "date": "", "linked_items": []}, {"id": "nz_devonport", "name": "HMNZS Devonport (Auckland, NZ): Royal New Zealand Navy base (not verified in this build)", "lat": -36.833, "lon": 174.796, "cat": "navy_base", "note": "Public information: Royal New Zealand Navy base. Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "fanc_noumea", "name": "French Armed Forces in New Caledonia (FANC), Nouméa (not verified in this build)", "lat": -22.26, "lon": 166.44, "cat": "navy_base", "note": "Public information: French forces in New Caledonia. Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "woomera", "name": "RAAF Woomera Range Complex (SA): Australian Defence Force test and evaluation range (about 122,000 km²)", "lat": -30.9731, "lon": 136.4756, "cat": "missile_base", "note": "Test and evaluation range run by the RAAF for defence materiel; the Woomera Prohibited Area and its restricted airspace are controlled by the RAAF. Launch Area 5 hosted British rocket launches from 1958 to 1971 (Wikipedia). Coordinates are for Launch Area 5.", "source": "Wikipedia (RAAF Woomera Range Complex; Woomera Launch Area 5)", "date": "", "linked_items": []}, {"id": "kwajalein", "name": "Ronald Reagan Space and Missile Test Range (Kwajalein Atoll, Marshall Islands): US Army test range", "lat": 8.72, "lon": 167.73, "cat": "missile_base", "note": "Renamed in 2026 from the Ronald Reagan Ballistic Missile Defense Test Site; run by the US Army Kwajalein Atoll (Wikipedia; DVIDS, Apr 2026). Minuteman III test launches from Vandenberg have flown to this range (Newsweek, navigational warnings, 2025).", "source": "Wikipedia (Ronald Reagan Space and Missile Test Range); DVIDS (Apr 2026); Newsweek (2025)", "date": "", "linked_items": []}, {"id": "koonibba", "name": "Koonibba Test Range (SA; Southern Launch): sub-orbital and re-entry test range", "lat": -32.3667, "lon": 133.65, "cat": "space_site", "note": "Australia's first Launch Facility Licence (SpaceAustralia, 2021). The range covers up to 41,000 km². 2026 orbital re-entries W-5 and W-6, and a June 2026 mission for Defence Science and Technology Group (AeroVia, 2026). Position approximate.", "source": "AeroVia (2026); SpaceAustralia (2021); Wikipedia (Koonibba Test Range)", "date": "", "linked_items": []}, {"id": "arnhem", "name": "Arnhem Space Centre (Nhulunbuy, NT): commercial spaceport (Equatorial Launch Australia)", "lat": -12.2, "lon": 136.75, "cat": "space_site", "note": "Operated by Equatorial Launch Australia. The first suborbital sounding rocket was launched from here; the operator's headquarters moved to Adelaide (Wikipedia, 2026). Position approximate.", "source": "Wikipedia (Arnhem Space Centre; 2026)", "date": "", "linked_items": []}, {"id": "mahia", "name": "Rocket Lab Launch Complex 1 (Māhia Peninsula, NZ): private orbital spaceport", "lat": -39.26, "lon": 177.86, "cat": "space_site", "note": "The world's first private orbital spaceport; more than 80 launches. The last launch was on 11 Sep 2026 (rocketlaunch.org, 2026). Kakushin Rising (JAXA) launched from here on 23 Apr 2026 (Rocket Lab).", "source": "Rocket Lab (launch list, 2026); rocketlaunch.org (2026)", "date": "", "linked_items": []}, {"id": "abbot_point", "name": "Abbot Point spaceport (Queensland) (listed in 2026 launch sites; not verified in this build)", "lat": -19.9, "lon": 148.08, "cat": "space_site", "note": "Listed among 2026 orbital launch sites (Gunter's Space Page). Not verified in this build; position approximate.", "source": "Gunter's Space Page (2026 listing); not verified in this build", "date": "", "linked_items": []}, {"id": "tidbinbilla", "name": "Canberra Deep Space Communication Complex (Tidbinbilla, ACT): NASA deep-space station (not verified in this build)", "lat": -35.4017, "lon": 148.9813, "cat": "space_site", "note": "Public information: NASA's Australian deep-space tracking station. Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "shoal_bay", "name": "Defence Receiving Station Shoal Bay (Darwin, NT): Australian Signals Directorate satellite and HF intercept", "lat": -12.32, "lon": 130.86, "cat": "cyber_hub", "note": "Controlled by the Australian Signals Directorate; satellite communications interception and HF signals (Wikipedia, Signals intelligence platforms by nation).", "source": "Wikipedia (Signals intelligence operational platforms by nation)", "date": "", "linked_items": []}, {"id": "kojarena", "name": "Australian Defence Satellite Communications Station (Kojarena, WA): satellite communications", "lat": -31.76, "lon": 115.9, "cat": "cyber_hub", "note": "Part of the Defence satellite communications network near Kojarena (Wikipedia, Joint Geological and Geophysical Research Station). Position approximate.", "source": "Wikipedia (Joint Geological and Geophysical Research Station)", "date": "", "linked_items": []}, {"id": "jggrs", "name": "Joint Geological and Geophysical Research Station (Alice Springs, NT): seismic monitoring, US and Australian", "lat": -23.77, "lon": 133.7, "cat": "cyber_hub", "note": "Seismic monitoring station (USAF and Australian Defence). Its data are processed in Canberra and shared with seismologists and international agencies (Wikipedia). Position approximate.", "source": "Wikipedia (Joint Geological and Geophysical Research Station)", "date": "", "linked_items": []}, {"id": "asd_hq", "name": "Australian Signals Directorate headquarters (Canberra) (not verified in this build)", "lat": -35.295, "lon": 149.145, "cat": "cyber_hub", "note": "Public information: Australia's signals and cyber agency. Position approximate; not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "gcsb", "name": "GCSB headquarters (Wellington, NZ) (not verified in this build)", "lat": -41.293, "lon": 174.78, "cat": "cyber_hub", "note": "Public information: New Zealand's signals and cyber agency. Position approximate; not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "waihopai", "name": "Waihopai signals station (Blenheim, NZ): historic intercept station; current status not verified in this build", "lat": -41.536, "lon": 173.918, "cat": "cyber_hub", "note": "Historic GCSB satellite intercept station. Its current status was not verified in this build. Position approximate.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "adf_hq", "name": "Australian Defence Headquarters (Russell, Canberra) (not verified in this build)", "lat": -35.3, "lon": 149.16, "cat": "cantonment", "note": "Public information: Australia's defence headquarters. Position approximate; not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "nzdf_hq", "name": "New Zealand Defence Force headquarters (Wellington) (not verified in this build)", "lat": -41.288, "lon": 174.78, "cat": "cantonment", "note": "Public information: NZDF headquarters. Position approximate; not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "rfmf_hq", "name": "Republic of Fiji Military Forces headquarters (Queen Elizabeth Barracks, Suva) (not verified in this build)", "lat": -18.13, "lon": 178.41, "cat": "cantonment", "note": "Public information: the RFMF headquarters. Position approximate; not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "opal", "name": "OPAL multi-purpose research reactor (Lucas Heights, Sydney): ANSTO's 20 MW research reactor", "lat": -34.05, "lon": 150.99, "cat": "nuclear_site", "note": "Australia's only nuclear reactor: a 20 MW research reactor using low-enriched uranium. It operated 98.3% of its scheduled time in 2025-26 (ANSTO). It produces radioisotopes and neutron beams and cannot produce electricity (ANSTO; Nuclear Engineering International).", "source": "ANSTO (OPAL, 2026); Nuclear Engineering International (2025)", "date": "", "linked_items": []}, {"id": "hifar", "name": "HIFAR research reactor (Lucas Heights; 1958-2007): decommissioning under way", "lat": -34.052, "lon": 150.988, "cat": "nuclear_site", "note": "Australia's first research reactor, operated 1958-2007 and now being decommissioned. Radiological waste is managed on site (ANSTO, 2026).", "source": "ANSTO (2026)", "date": "", "linked_items": []}, {"id": "lucas_waste", "name": "Lucas Heights waste stores (ANSTO): legacy and intermediate-level radioactive waste storage", "lat": -34.053, "lon": 150.994, "cat": "nuclear_site", "note": "Most of Australia's radioactive waste is stored at Lucas Heights; the former MOATA reactor remains encased in concrete and steel (ABC News, Jul 2024; Conservation Council SA, 2022).", "source": "ABC News (16 Jul 2024); Conservation Council SA (2022)", "date": "", "linked_items": []}, {"id": "napandee", "name": "Napandee (near Kimba, SA): proposed National Radioactive Waste Management Facility (plan halted by court ruling)", "lat": -33.14, "lon": 136.43, "cat": "nuclear_site", "note": "The 2020-21 site declaration was torn up after a Federal Court ruling in favour of the Barngarla traditional owners (ABC News, Jul 2024). Position approximate.", "source": "ABC News (16 Jul 2024); Conservation Council SA (May 2022)", "date": "", "linked_items": []}, {"id": "olympic_dam", "name": "Olympic Dam mine (Roxby Downs, SA): copper, gold and uranium (BHP)", "lat": -30.44, "lon": 136.89, "cat": "nuclear_site", "note": "Underground mine with 261,000 tonnes of contained uranium oxide; about 20% of revenue comes from uranium (World Nuclear Association).", "source": "World Nuclear Association (Australia's uranium mines)", "date": "", "linked_items": []}, {"id": "beverley", "name": "Beverley uranium mine (SA; in-situ recovery) (approximate position)", "lat": -30.33, "lon": 139.56, "cat": "nuclear_site", "note": "Operating uranium mine using in-situ recovery (World Nuclear Association). Position approximate.", "source": "World Nuclear Association (Australia's uranium mines)", "date": "", "linked_items": []}, {"id": "four_mile", "name": "Four Mile uranium mine (SA; in-situ recovery) (approximate position)", "lat": -29.95, "lon": 139.94, "cat": "nuclear_site", "note": "Operating uranium mine using in-situ recovery (World Nuclear Association). Position approximate.", "source": "World Nuclear Association (Australia's uranium mines)", "date": "", "linked_items": []}, {"id": "ranger", "name": "Ranger uranium mine (Jabiru, NT): closed; rehabilitation under the closure plan", "lat": -12.667, "lon": 132.9, "cat": "nuclear_site", "note": "Closed. Rehabilitation is planned over about seven years under the 2020 closure plan (World Nuclear Association).", "source": "World Nuclear Association (Australia's uranium mines)", "date": "", "linked_items": []}, {"id": "maralinga", "name": "Maralinga and Emu Field (SA): British nuclear weapons test sites, 1956-1963 (not verified in this build)", "lat": -30.21, "lon": 131.68, "cat": "nuclear_site", "note": "Public information: British atomic tests in the 1950s and 1960s; clean-up disputes continue. Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "monte_bello", "name": "Monte Bello Islands (WA): British atomic test site, 1952-1957 (not verified in this build)", "lat": -20.42, "lon": 115.55, "cat": "nuclear_site", "note": "Public information: the first British atomic test (1952) was held here. Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "henderson", "name": "Henderson Defence Precinct (Western Australia): AUKUS submarine and shipbuilding precinct", "lat": -32.12, "lon": 115.77, "cat": "defense_industry", "note": "Site and boundary announced on 26 Aug 2026. It supports the sustainment pipeline for the submarine programme, about 10,000 jobs over two decades (Australian Submarine Agency, 26 Aug 2026).", "source": "Australian Submarine Agency (26 Aug 2026)", "date": "", "linked_items": []}, {"id": "osborne", "name": "Osborne shipyard (Adelaide, SA): construction centre for SSN-AUKUS submarines", "lat": -34.798, "lon": 138.11, "cat": "defense_industry", "note": "Will be the centre of construction for Australia's SSN-AUKUS nuclear-powered submarines (Australian Submarine Agency, 26 Aug 2026).", "source": "Australian Submarine Agency (26 Aug 2026)", "date": "", "linked_items": []}, {"id": "torres", "name": "Torres Strait (Australia-PNG): sea route between the Coral Sea and the Arafura Sea", "lat": -10.3, "lon": 142.3, "cat": "chokepoint", "note": "Between Queensland and Papua New Guinea. PNG determined the maritime border in the strait (Wikipedia). It connects the Coral Sea and the Arafura Sea (Anantam IAS, 2026). Position approximate.", "source": "Wikipedia (Torres Strait); Anantam IAS (2026)", "date": "", "linked_items": []}, {"id": "bass", "name": "Bass Strait (Victoria-Tasmania): between mainland Australia and Tasmania", "lat": -39.6, "lon": 146.3, "cat": "chokepoint", "note": "Connects the Tasman Sea and the Southern Ocean; separates mainland Australia from Tasmania (Anantam IAS, 2026). Position approximate.", "source": "Anantam IAS (2026)", "date": "", "linked_items": []}, {"id": "cook", "name": "Cook Strait (New Zealand): between the North and South Islands (not verified in this build)", "lat": -41.2, "lon": 174.3, "cat": "chokepoint", "note": "Public information: the strait that carries New Zealand's main undersea and ferry links between the islands. Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "vitiaz", "name": "Vitiaz Strait (Papua New Guinea): between New Guinea and New Britain (not verified in this build)", "lat": -5.6, "lon": 148.2, "cat": "chokepoint", "note": "Public information: a PNG strait on a major sea route north of the Solomon Sea. Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "gorgon", "name": "Gorgon LNG (Barrow Island, WA): 15.6 MTPA, three trains; domestic gas plant (300 TJ/d)", "lat": -20.8, "lon": 115.45, "cat": "pipeline", "note": "Chevron-operated. Three LNG trains of 5.2 MTPA each; the first cargo left in March 2016; a 90 km domestic pipeline links the island to the mainland (Chevron; Wikipedia). Stage Three (Geryon and Eurytion fields) was expected to start production in 2026 (Offshore Technology). Position approximate.", "source": "Chevron (fact sheet); Offshore Technology; Wikipedia (Gorgon gas project)", "date": "", "linked_items": []}, {"id": "nws", "name": "North West Shelf LNG (Karratha, WA): 14.3 MTPA; one of five trains shut (Woodside, 2026)", "lat": -20.73, "lon": 116.85, "cat": "pipeline", "note": "Australia's oldest LNG project. One of five production trains was shut after the March 2026 cyclone (Hydrocarbon Processing, Mar 2026). Position approximate.", "source": "Hydrocarbon Processing (Mar 2026)", "date": "", "linked_items": []}, {"id": "pluto", "name": "Pluto LNG (Karratha, WA; Woodside) (approximate position)", "lat": -20.61, "lon": 116.75, "cat": "pipeline", "note": "Downtime at Pluto in 2026 lowered Woodside's production guidance (Hydrocarbon Processing, Mar 2026). Position approximate.", "source": "Hydrocarbon Processing (Mar 2026)", "date": "", "linked_items": []}, {"id": "wheatstone", "name": "Wheatstone LNG (Onslow, WA; Chevron) (approximate position)", "lat": -20.65, "lon": 115.12, "cat": "pipeline", "note": "Outages in March 2026 were likely due to Tropical Cyclone Narelle (Hydrocarbon Processing, Mar 2026). Position approximate.", "source": "Hydrocarbon Processing (Mar 2026)", "date": "", "linked_items": []}, {"id": "ichthys", "name": "Ichthys LNG (offshore field off WA; onshore plant near Darwin, NT; Inpex)", "lat": -12.35, "lon": 130.85, "cat": "pipeline", "note": "Two trains of 4.0 MTPA each, commissioned in 2018 (SEALA AI, 2026). Inpex reported no damage from the 2026 cyclone (Hydrocarbon Processing, Mar 2026). Position approximate.", "source": "SEALA AI (2026); Hydrocarbon Processing (Mar 2026)", "date": "", "linked_items": []}, {"id": "darwin_lng", "name": "Darwin LNG (Wickham Point, NT; Santos): 3.7 MTPA; temporarily offline after the March 2026 cyclone", "lat": -12.4, "lon": 130.8, "cat": "pipeline", "note": "A 3.7 MTPA plant that was offline temporarily after the March 2026 cyclone (Hydrocarbon Processing, Mar 2026). Position approximate.", "source": "Hydrocarbon Processing (Mar 2026)", "date": "", "linked_items": []}, {"id": "curtis", "name": "Curtis Island LNG (Gladstone, Queensland): Queensland Curtis, Australia Pacific and Gladstone LNG", "lat": -23.9, "lon": 151.2, "cat": "pipeline", "note": "Coal-seam gas export plants on Curtis Island; part of Australia's ten-plant LNG fleet with 85.1 MTPA of capacity (SEALA AI, Feb 2026). Position approximate.", "source": "SEALA AI (Feb 2026)", "date": "", "linked_items": []}, {"id": "dbngp", "name": "Dampier to Bunbury Natural Gas Pipeline (Western Australia): main gas trunk line", "lat": -27.0, "lon": 116.2, "cat": "pipeline", "note": "The domestic gas trunk line that the Gorgon domestic pipeline ties into (Offshore Technology; Chevron). Position approximate (route midpoint).", "source": "Offshore Technology; Chevron", "date": "", "linked_items": []}, {"id": "png_lng", "name": "PNG LNG (Hides, Southern Highlands, PNG): gas conditioning plant and over 450 km of onshore pipeline", "lat": -5.25, "lon": 143.9, "cat": "pipeline", "note": "Hides gas field and gas conditioning plant, with over 450 km of onshore pipeline (Spiecapag, 2026). Position approximate.", "source": "Spiecapag (2026)", "date": "", "linked_items": []}, {"id": "tangguh", "name": "Tangguh LNG (Bintuni Bay, West Papua, Indonesia): LNG expansion (approximate position)", "lat": -2.25, "lon": 133.2, "cat": "pipeline", "note": "Expansion project on the southern shore of Bintuni Bay (Spiecapag, 2026). Position approximate.", "source": "Spiecapag (2026)", "date": "", "linked_items": []}, {"id": "moomba", "name": "Moomba gas field and plant (SA) and gas pipeline to Sydney (not verified in this build)", "lat": -28.1, "lon": 140.2, "cat": "pipeline", "note": "Public information: the Moomba-Sydney gas pipeline. Not verified in this build; position approximate.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "perth_cable", "name": "Submarine cable protection zone off Perth: two cable faults on 8-9 August 2026 (reported)", "lat": -31.9, "lon": 115.2, "cat": "pipeline", "note": "Two cables faulted one after the other on 8-9 August 2026; a vessel was reportedly seen nearby (SpecialEurasia, 11 Aug 2026). Reported; not confirmed in this build.", "source": "SpecialEurasia (11 Aug 2026)", "date": "", "linked_items": []}, {"id": "west_papua", "name": "West Papua highlands (Puncak, Yahukimo): TPNPB insurgency; more than 125,000 reported displaced", "lat": -4.48, "lon": 137.12, "cat": "flashpoint", "note": "Indonesian security forces are fighting the West Papua National Liberation Army (TPNPB). More than 125,000 people are reported displaced (Asia Pacific Report, 25 Sep 2026). The April 2025 Yahukimo attack killed 15 to 17 gold miners (Wikipedia; AP). Position approximate.", "source": "Asia Pacific Report (25 Sep 2026); Wikipedia (Yahukimo massacre); AP (2025)", "date": "", "linked_items": []}, {"id": "bougainville", "name": "Bougainville (Buka and Arawa): independence vote; PNG Parliament ratification pending", "lat": -6.3, "lon": 155.0, "cat": "flashpoint", "note": "97.7% of voters chose independence in the 2019 non-binding referendum. PNG Parliament debated ratification in August 2026; the autonomous government plans to declare independence in 2030 (Asia Pacific Report, 26 Aug 2026). Position approximate.", "source": "Asia Pacific Report (26 Aug 2026); bne IntelliNews (2026)", "date": "", "linked_items": []}, {"id": "cap_jakarta", "name": "Jakarta (capital, Indonesia)", "lat": -6.2088, "lon": 106.8456, "cat": "capital", "note": "Capital of Indonesia.", "source": "public information", "date": "", "linked_items": []}, {"id": "cap_dili", "name": "Dili (capital, Timor-Leste)", "lat": -8.5569, "lon": 125.5603, "cat": "capital", "note": "Capital of Timor-Leste (East Timor).", "source": "public information", "date": "", "linked_items": []}, {"id": "surabaya_sub", "name": "Surabaya (East Java): Indonesian Navy 2nd Fleet and submarine base", "lat": -7.2575, "lon": 112.7521, "cat": "submarine_base", "note": "Home port of the Type 209 boats KRI Nagapasa, KRI Ardadedali and KRI Alugoro; the 2nd Fleet Command is based here (Wikipedia). Position approximate.", "source": "Wikipedia (KRI Ardadedali; KRI Alugoro)", "date": "", "linked_items": []}, {"id": "pt_pal", "name": "PT PAL Indonesia shipyard (Surabaya): builds two Scorpene Evolved submarines", "lat": -7.22, "lon": 112.745, "cat": "defense_industry", "note": "State shipbuilder. First steel was cut on 7 Aug 2026 for the lead Scorpene Evolved boat; the Navy expects delivery in 2032-33 (Antara; Navy Leaders). Naval Group provides design support. Position approximate.", "source": "Antara (Aug 2026); Navy Leaders (Aug 2026); Army Recognition (Aug 2026)", "date": "", "linked_items": []}, {"id": "halim_afb", "name": "Halim Perdanakusuma Air Force Base (Jakarta): National Air Operations Command", "lat": -6.2661, "lon": 106.8922, "cat": "air_base", "note": "National Air Operations Command (Koopsudnas) is headquartered here. The base hosts transport and VIP squadrons; the civil airport shares the runway (Global Military, Aug 2026; Wikipedia).", "source": "Global Military (Aug 2026); Wikipedia (Halim Perdanakusuma International Airport)", "date": "", "linked_items": []}, {"id": "iswahjudi_afb", "name": "Iswahjudi Air Force Base (Maospati, East Java): fighter base, 32nd Air Wing", "lat": -7.6158, "lon": 111.4341, "cat": "air_base", "note": "Home to the 32nd Air Wing and four other units (ICAO WARI; Global Military, Aug 2026).", "source": "Global Military (Aug 2026)", "date": "", "linked_items": []}, {"id": "hasanuddin_afb", "name": "Sultan Hasanuddin Air Force Base (Makassar): 33rd Air Wing, Su-27/Su-30", "lat": -5.0616, "lon": 119.554, "cat": "air_base", "note": "Su-30MK2 overran the runway on 24 Aug 2026 during a simulated take-off after a major overhaul; the crew was unhurt (migflug, 2026). Position approximate.", "source": "migflug (Aug 2026); Wikipedia (Sultan Hasanuddin International Airport)", "date": "", "linked_items": []}, {"id": "manuhua_afb", "name": "Manuhua Air Force Base (Biak, Papua): 13th Air Wing; 27th Air Squadron (CN235)", "lat": -1.19, "lon": 136.108, "cat": "air_base", "note": "ICAO WABB; runway 11/29, 3,571 m (migflug, 2026; Wikipedia). Position approximate.", "source": "migflug (2026); Wikipedia (Indonesian Air Force)", "date": "", "linked_items": []}, {"id": "raden_sadjad_afb", "name": "Raden Sadjad Air Force Base (Ranai, Natuna Islands)", "lat": 3.926, "lon": 108.387, "cat": "air_base", "note": "ICAO WIDO; runway 18/36, 2,560 m (Wikipedia, Indonesian Air Force listing). The Natuna Islands face the South China Sea. Position approximate.", "source": "Wikipedia (Indonesian Air Force)", "date": "", "linked_items": []}, {"id": "sunda", "name": "Sunda Strait (Java-Sumatra)", "lat": -6.05, "lon": 105.8, "cat": "chokepoint", "note": "Strait between Java and Sumatra (public information). Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "lombok", "name": "Lombok Strait (Bali-Lombok)", "lat": -8.78, "lon": 115.75, "cat": "chokepoint", "note": "Deep-water route between the Java Sea and the Indian Ocean (public information). Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}, {"id": "makassar", "name": "Makassar Strait (Borneo-Sulawesi)", "lat": -2.0, "lon": 118.5, "cat": "chokepoint", "note": "Strait between Borneo and Sulawesi (public information). Not verified in this build.", "source": "public information (not verified in this build)", "date": "", "linked_items": []}], "connector_status": [{"name": "offline_seed", "configured": true, "ok": true, "message": "Offline snapshot: reference items and strategic sites only; backend not connected", "item_count": 36}], "total_items": 36};
+  const CAT_META = {"military": {"label": "Military & Strategic", "color": "var(--amber)"}, "economic": {"label": "Economic & Trade", "color": "var(--cyan-h)"}, "political": {"label": "Political & Diplomatic", "color": "var(--green)"}, "hazard": {"label": "Natural Hazards", "color": "var(--violet)"}, "aviation": {"label": "Aviation & Maritime Notices", "color": "var(--violet)"}, "strategic": {"label": "Strategic & Arms Monitoring", "color": "var(--magenta)"}, "cyber": {"label": "Cyber & MSS", "color": "var(--red)"}, "space": {"label": "Space Program", "color": "var(--cyan-h)"}, "social_local": {"label": "Social pulse", "color": "var(--gold)"}, "social_global": {"label": "Social pulse (global)", "color": "var(--gold)"}};
+
+  function escapeHtml(s){
+    if(s === null || s === undefined) return "";
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  function project(lon, lat){
+    const phi = lat * Math.PI/180, lam = lon * Math.PI/180;
+    const dl = lam - PROJ.lam0;
+    const cosc = PROJ.sinp0 * Math.sin(phi) + PROJ.cosp0 * Math.cos(phi) * Math.cos(dl);
+    const k = Math.sqrt(2 / (1 + cosc));
+    const x = k * Math.cos(phi) * Math.sin(dl);
+    const y = k * (PROJ.cosp0 * Math.sin(phi) - PROJ.sinp0 * Math.cos(phi) * Math.cos(dl));
+    return [PROJ.translate[0] + x*PROJ.scale, PROJ.translate[1] - y*PROJ.scale];
+  }
+
+  const MARKER_COLOR = {"capital": "#c9a35c", "flashpoint": "#ef5354", "chokepoint": "#f59e0b", "hazard": "#58c4ff", "submarine_base": "#fb923c", "navy_base": "#f97316", "carrier_port": "#fdba74", "cantonment": "#c084fc", "nuclear_site": "#facc15", "space_site": "#06b6d4", "satellite_station": "#60a5fa", "defense_industry": "#84cc16", "pipeline": "#4ade80", "nuclear_plant": "#eab308", "air_base": "#a78bfa", "airport": "#38bdf8", "seaport": "#22c55e", "custom": "#ffffff"};
+
+  // ---------------- 72h / All-time window ----------------
+  let timeWindow = "72h";   // default per request; stays until the user picks otherwise
+  const WINDOW_MS = 72 * 3600 * 1000;
+
+  // Robust across the formats the connectors actually emit: ISO, RFC-822 (RSS
+  // "published"), GDELT "YYYYMMDDTHHMMSSZ", and USGS epoch-ms as a string.
+  function parseItemDate(s){
+    if(!s) return null;
+    if(/^\d{13}$/.test(String(s))) return new Date(parseInt(s, 10));
+    const g = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/.exec(String(s));
+    if(g) return new Date(Date.UTC(+g[1], +g[2]-1, +g[3], +g[4], +g[5], +g[6]));
+    const d = new Date(s);
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function inWindow(it){
+    if(timeWindow === "all") return true;
+    const d = parseItemDate(it.date);
+    // Strict by design: an item with no verifiable timestamp (background
+    // reference entries dated "ongoing"/"background", or a date string that
+    // can't be parsed) is NOT shown in the 72h view - claiming it's "last
+    // 72 hours" news when nothing proves that would break the one rule this
+    // toggle exists to enforce. Switch to All Time to see them.
+    if(!d) return false;
+    return (Date.now() - d.getTime()) <= WINDOW_MS;
+  }
+  function windowedCats(cats){
+    const out = {};
+    Object.keys(cats).forEach(function(k){ out[k] = (cats[k]||[]).filter(inWindow); });
+    return out;
+  }
+
+  let currentData = null, isLive = false;
+  // start activeLayers from whatever the checkboxes actually show as checked
+  // in the HTML (event layers on, infrastructure layers off by default),
+  // rather than hardcoding it separately and risking the two going out of sync
+  let activeLayers = new Set(
+    Array.from(document.querySelectorAll(".layer-cb")).filter(cb => cb.checked).map(cb => cb.dataset.layer)
+  );
+  let refreshTimer = null;
+  let customMarkers = [];
+
+  // ---------------- data loading ----------------
+  async function loadData(manual){
+    const btn = document.getElementById("refreshBtn");
+    if(manual && btn){ btn.classList.add("spinning"); btn.disabled = true; }
+    try {
+      const url = manual ? "/api/refresh" : "/api/snapshot";
+      const opts = manual ? {method:"POST"} : {cache:"no-store"};
+      const res = await fetch(url, opts);
+      if(!res.ok){
+        if(res.status === 429){ const j = await res.json().catch(()=>({})); throw new Error(j.error || "rate limited"); }
+        // try to surface the server's own error detail (e.g. a specific
+        // connector/rendering failure), not just the bare status code
+        const body = await res.json().catch(()=>null);
+        throw new Error(body && body.error ? ("HTTP " + res.status + ": " + body.error) : ("HTTP " + res.status));
+      }
+      const data = await res.json();
+      currentData = data; isLive = true;
+      render(data, true, null);
+    } catch(e) {
+      currentData = SEED_DATA; isLive = false;
+      render(SEED_DATA, false, e.message);
+    } finally {
+      if(btn){ btn.classList.remove("spinning"); btn.disabled = false; }
+    }
+  }
+
+  // ---------------- render orchestration ----------------
+  function render(data, live, errMsg){
+    // apply the 72h / All-time window ONCE, then everything below (panels,
+    // KPIs, map dots) reads from the same filtered view - they can't disagree
+    const view = Object.assign({}, data, {items_by_category: windowedCats(data.items_by_category || {})});
+    view.markers = (data.markers || []).map(function(m){
+      return Object.assign({}, m, {linked_items: (m.linked_items || []).filter(inWindow)});
+    });
+    renderStatusBar(live, view, errMsg);
+    renderKPIs(view);
+    renderMarkers(view.markers, view.items_by_category);
+    renderPanels(view.items_by_category);
+    renderTicker(view);
+    renderDarkWeb(view);
+    renderConnectorStrip(view.connector_status || [], live);
+    applyFilter(); // keep an active search query applied across re-renders
+  }
+
+  function renderStatusBar(live, data, errMsg){
+    const pill = document.getElementById("statusPill");
+    const txt = document.getElementById("statusPillText");
+    const banner = document.getElementById("offlineBanner");
+    const footerNote = document.getElementById("footerNote");
+    const snapDate = document.getElementById("snapDate");
+    if(live){
+      pill.className = "status-pill live"; txt.textContent = "Live backend";
+      banner.classList.remove("show");
+      const when = data.updated_at ? new Date(data.updated_at*1000).toLocaleTimeString() : "just now";
+      snapDate.textContent = "Backend last polled " + when;
+      footerNote.innerHTML = "Live backend connected &middot; " + (data.total_items||0) + " items in feed &middot; not investment/operational advice, verify time-critical items against primary sources";
+    } else {
+      pill.className = "status-pill offline"; txt.textContent = "Offline snapshot";
+      banner.classList.add("show");
+      banner.innerHTML = "<b>Backend not reachable" + (errMsg ? " (" + escapeHtml(errMsg) + ")" : "") +
+        "</b> &mdash; showing the embedded Aug 10, 2026 research snapshot instead of live data. " +
+        "Run <code>python run.py</code> and reload this page to connect the real backend.";
+      snapDate.textContent = "Offline snapshot - Aug 10, 2026";
+      footerNote.textContent = "Offline snapshot mode - start the Python backend for live data.";
+    }
+  }
+
+  function countItems(cats, dataObj){
+    let n = 0;
+    cats.forEach(c => n += (dataObj[c]||[]).length);
+    return n;
+  }
+
+  function renderKPIs(data){
+    const cats = data.items_by_category || {};
+    document.getElementById("kpi-markers").textContent = (data.markers||[]).length;
+    document.getElementById("kpi-military").textContent = (cats.milops||[]).length;
+    document.getElementById("kpi-economic").textContent = (cats.econ||[]).length;
+    document.getElementById("kpi-political").textContent = (cats.geo||[]).length;
+    document.getElementById("kpi-hazard").textContent = (cats.hazard||[]).length;
+    document.getElementById("kpi-darkweb").textContent = (cats.darkweb||[]).length;
+    document.getElementById("count-markers").textContent = (data.markers||[]).length + " sites";
+    const infraNote = document.getElementById("infraNote");
+    if(infraNote){
+      const info = data.infrastructure || {};
+      if(isLive){
+        infraNote.textContent = (info.airport_count||0) + " airports live from OurAirports (CC0 dataset) + " +
+          "verified seaports/naval bases/defense HQs. Real-time ship/submarine positions aren't shown - " +
+          "no open source publishes that for any navy (see README).";
+      } else {
+        infraNote.textContent = "Offline snapshot: infrastructure markers frozen from build time, not live.";
+      }
+    }
+  }
+
+  // ---------------- map markers ----------------
+  function addMarkerEl(layer, m, color, extra){
+    const [x,y] = project(m.lon, m.lat);
+    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    g.setAttribute("class", "marker");
+    g.setAttribute("transform", "translate(" + x.toFixed(1) + "," + y.toFixed(1) + ")");
+    g.dataset.name = m.name; g.dataset.note = m.note || "";
+    g.dataset.source = m.source || ""; g.dataset.date = m.date || "";
+    g.dataset.color = color;
+    g.dataset.linked = JSON.stringify(m.linked_items || []);
+    const pulse = (m.linked_items && m.linked_items.length) || (extra && extra.pulse);
+    g.innerHTML = (pulse ? '<circle class="pulse" r="5" fill="none" stroke="'+color+'" stroke-width="1.6"/>' : '') +
+                  '<circle class="core" r="3.4" fill="'+color+'"/>';
+    layer.appendChild(g);
+  }
+
+  function renderMarkers(markers, cats){
+    const layer = document.getElementById("markerLayer");
+    if(!layer) return;
+    layer.innerHTML = "";
+    // 1. named strategic sites (pulse when a windowed headline mentions them)
+    (markers || []).forEach(function(m){
+      if(!activeLayers.has(m.cat)) return;
+      addMarkerEl(layer, m, MARKER_COLOR[m.cat] || "#c9a35c");
+    });
+    // 2. any windowed item that carries its OWN coordinates (USGS quakes) -
+    // a real lat/lon from the source, not a guess
+    if(activeLayers.has("hazard")){
+      Object.keys(cats || {}).forEach(function(k){
+        (cats[k] || []).forEach(function(it){
+          if(typeof it.lat === "number" && typeof it.lon === "number"){
+            addMarkerEl(layer, {name: it.label, note: it.text, source: it.source, date: it.date,
+              lat: it.lat, lon: it.lon, linked_items: []}, MARKER_COLOR.hazard, {pulse: true});
+          }
+        });
+      });
+    }
+    // 3. the user's own plotted markers
+    if(activeLayers.has("custom")){
+      customMarkers.forEach(function(cm){
+        addMarkerEl(layer, {name: cm.label, note: cm.remark || "(no remark)", source: "You",
+          date: cm.added, lat: cm.lat, lon: cm.lon, linked_items: []}, MARKER_COLOR.custom, {pulse: true});
+      });
+    }
+    wireMarkerEvents();
+  }
+
+  function wireMarkerEvents(){
+    const wrap = document.getElementById("mapWrap");
+    const tip = document.getElementById("mapTip");
+    if(!wrap || !tip) return;
+    function hideTip(){ tip.classList.remove("show"); }
+    function positionTip(evt){
+      const rect = wrap.getBoundingClientRect();
+      let cx, cy;
+      if(evt.touches && evt.touches[0]){ cx = evt.touches[0].clientX; cy = evt.touches[0].clientY; }
+      else { cx = evt.clientX; cy = evt.clientY; }
+      let x = cx - rect.left, y = cy - rect.top;
+      const tw = 260, th = 130;
+      if(x + tw + 24 > rect.width) x = x - tw - 18; else x = x + 16;
+      if(y + th + 20 > rect.height) y = Math.max(4, y - th - 10); else y = y + 14;
+      tip.style.left = x+"px"; tip.style.top = y+"px";
+    }
+    function showTip(m, evt){
+      const name = m.dataset.name, note = m.dataset.note, source = m.dataset.source,
+            date = m.dataset.date, color = m.dataset.color;
+      let linked = [];
+      try { linked = JSON.parse(m.dataset.linked || "[]"); } catch(e){ linked = []; }
+      let html = '<div class="t-name" style="color:'+color+'">'+escapeHtml(name)+'</div>' +
+                 '<div>'+escapeHtml(note)+'</div>' +
+                 '<div class="t-meta">'+escapeHtml(source)+(date?(" &middot; "+escapeHtml(date)):"")+'</div>';
+      if(linked.length){
+        html += '<div class="t-meta" style="margin-top:6px;color:var(--text-dim);">Recent related items:</div>';
+        linked.slice(0,3).forEach(function(li){
+          html += '<div class="marker-tt-link">&bull; ' + escapeHtml((li.label||"").slice(0,60)) + '</div>';
+        });
+      }
+      tip.innerHTML = html;
+      positionTip(evt);
+      tip.classList.add("show");
+    }
+    wrap.querySelectorAll(".marker").forEach(function(m){
+      m.addEventListener("mouseenter", function(evt){ showTip(m, evt); });
+      m.addEventListener("mousemove", positionTip);
+      m.addEventListener("mouseleave", hideTip);
+      m.addEventListener("click", function(evt){
+        if(tip.classList.contains("show")){ hideTip(); } else { showTip(m, evt); }
+      });
+    });
+    wrap.removeEventListener("mouseleave", hideTip);
+    wrap.addEventListener("mouseleave", hideTip);
+  }
+
+  // layer toggle checkboxes
+  document.querySelectorAll(".layer-cb").forEach(function(cb){
+    cb.addEventListener("change", function(){
+      const cat = cb.dataset.layer;
+      if(cb.checked) activeLayers.add(cat); else activeLayers.delete(cat);
+      if(currentData) renderMarkers(currentData.markers || []);
+    });
+  });
+
+  // ---------------- panels ----------------
+  // Only http(s) URLs ever become links. A feed-supplied "javascript:" / "data:" URL
+  // would otherwise be a click-to-run XSS even though every text field is escaped.
+  function safeUrl(u){
+    if(!u) return null;
+    try { const x = new URL(String(u)); return (x.protocol === "http:" || x.protocol === "https:") ? x.href : null; }
+    catch(e){ return null; }
+  }
+  function fmtDate(s){
+    const d = parseItemDate(s);
+    return d ? d.toLocaleString([], {dateStyle:"medium", timeStyle:"short"}) : (s || "");
+  }
+  function itemHtml(it){
+    const href = safeUrl(it.url);
+    return '<div class="item" data-search="'+escapeHtml(((it.label||"")+" "+(it.text||"")).toLowerCase())+'">' +
+      '<div class="lbl">'+escapeHtml(it.label)+'</div>' +
+      (it.text && it.text !== it.label ? '<div class="txt">'+escapeHtml(it.text)+'</div>' : '') +
+      '<div class="meta">'+escapeHtml(it.source)+(it.date?(" &middot; "+escapeHtml(fmtDate(it.date))):"")+
+      (href ? ' &middot; <a href="'+escapeHtml(href)+'" target="_blank" rel="noopener noreferrer">source &#8599;</a>' : '')+
+      '</div></div>';
+  }
+
+  function renderPanels(cats){
+    const ids = HEADING_KEYS;
+    ids.forEach(function(cat){
+      const container = document.getElementById("items-"+cat);
+      const countEl = document.getElementById("count-"+cat);
+      if(!container) return;
+      const list = (cats[cat] || []).slice(0, 25);
+      if(countEl) countEl.textContent = list.length;
+      container.innerHTML = list.length
+        ? list.map(itemHtml).join("")
+        : '<div class="empty-note">' + (timeWindow === "72h"
+            ? (isLive
+                ? 'Nothing in the last 72 hours for this heading. Switch to <b>All Time</b> (top right) to see older items.'
+                : 'Backend offline - the embedded research snapshot is older than 72 hours, so it is hidden in this view. Switch to <b>All Time</b> to read it, or start the backend for live news.')
+            : 'No items for this heading yet.') + '</div>';
+    });
+  }
+
+  // ---------------- connector status strip ----------------
+  function renderConnectorStrip(statuses, live){
+    const el = document.getElementById("connectorStrip");
+    const note = document.getElementById("methodNote");
+    if(!live){
+      el.innerHTML = '<span class="conn-badge off">offline snapshot - connectors not queried</span>';
+      note.textContent = "Backend not connected. Start it with: python run.py  (see README.md)";
+      return;
+    }
+    el.innerHTML = statuses.map(function(s){
+      const cls = !s.configured ? "off" : (s.ok ? "ok" : "err");
+      const label = s.name + (s.configured ? (s.ok ? " \u2713 " + s.item_count : " \u2717") : " (not set)");
+      return '<span class="conn-badge '+cls+'" title="'+escapeHtml(s.message||"")+'">'+escapeHtml(label)+'</span>';
+    }).join("");
+    const okCount = statuses.filter(s=>s.ok).length;
+    note.textContent = okCount + " of " + statuses.length + " connectors returned data this poll. " +
+      "Hover a badge for its exact status message. Add API keys in .env or via secure_setup.py to enable more.";
+  }
+
+  // ---------------- search filter ----------------
+  let lastQuery = "";
+  function applyFilter(){
+    const q = lastQuery;
+    document.querySelectorAll(".item[data-search]").forEach(function(it){
+      if(!q){ it.classList.remove("dim"); return; }
+      const hay = it.getAttribute("data-search") || "";
+      if(hay.indexOf(q) === -1) it.classList.add("dim"); else it.classList.remove("dim");
+    });
+  }
+  const filterInput = document.getElementById("filterInput");
+  if(filterInput){
+    filterInput.addEventListener("input", function(){
+      lastQuery = filterInput.value.trim().toLowerCase();
+      applyFilter();
+    });
+  }
+
+  // ---------------- refresh button ----------------
+  const refreshBtn = document.getElementById("refreshBtn");
+  if(refreshBtn) refreshBtn.addEventListener("click", function(){ loadData(true); });
+
+  // ---------------- settings modal (API keys) ----------------
+  const settingsBackdrop = document.getElementById("settingsBackdrop");
+  const settingsBtn = document.getElementById("settingsBtn");
+  const closeSettingsBtn = document.getElementById("closeSettingsBtn");
+  const saveKeysBtn = document.getElementById("saveKeysBtn");
+  const keyFieldsEl = document.getElementById("keyFields");
+  const settingsMsg = document.getElementById("settingsMsg");
+
+  async function openSettings(){
+    settingsBackdrop.classList.add("show");
+    settingsMsg.textContent = ""; settingsMsg.className = "modal-msg";
+    keyFieldsEl.innerHTML = "Loading&hellip;";
+    try {
+      const res = await fetch("/api/keys");
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      const fields = await res.json();
+      keyFieldsEl.innerHTML = Object.keys(fields).map(function(name){
+        const f = fields[name];
+        return '<div class="key-field">' +
+          '<label><span class="kf-status'+(f.configured?" on":"")+'"></span>' + escapeHtml(f.label) +
+          (f.configured ? ' <span style="font-weight:400;color:var(--text-faint);">(set via '+escapeHtml(f.source)+')</span>' : '') +
+          '</label>' +
+          '<div class="kf-help">'+escapeHtml(f.help)+'</div>' +
+          '<input type="password" data-key="'+name+'" placeholder="'+
+            (f.configured ? "Already set - paste a new value to replace it" : "Paste key here, or leave blank to skip") +
+          '" autocomplete="off"/></div>';
+      }).join("");
+    } catch(e) {
+      keyFieldsEl.innerHTML = '<div class="modal-msg err">Could not load key status: ' + escapeHtml(e.message) +
+        (isLive ? "" : " (backend not connected - start it with python run.py first)") + '</div>';
+    }
+  }
+  function closeSettings(){ settingsBackdrop.classList.remove("show"); }
+
+  if(settingsBtn) settingsBtn.addEventListener("click", openSettings);
+  if(closeSettingsBtn) closeSettingsBtn.addEventListener("click", closeSettings);
+  if(settingsBackdrop) settingsBackdrop.addEventListener("click", function(e){
+    if(e.target === settingsBackdrop) closeSettings();
+  });
+
+  if(saveKeysBtn) saveKeysBtn.addEventListener("click", async function(){
+    const inputs = keyFieldsEl.querySelectorAll("input[data-key]");
+    const body = {};
+    inputs.forEach(function(inp){ if(inp.value.trim()) body[inp.dataset.key] = inp.value.trim(); });
+    if(!Object.keys(body).length){
+      settingsMsg.textContent = "Nothing to save - all fields blank."; settingsMsg.className = "modal-msg";
+      return;
+    }
+    saveKeysBtn.disabled = true; saveKeysBtn.textContent = "Saving\u2026";
+    try {
+      const res = await fetch("/api/keys", {method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(body)});
+      const j = await res.json();
+      if(!res.ok) throw new Error(j.error || ("HTTP " + res.status));
+      settingsMsg.textContent = "Saved " + j.saved.length + " key(s), encrypted. Reconnecting\u2026";
+      settingsMsg.className = "modal-msg ok";
+      await loadData(true);
+      setTimeout(function(){ openSettings(); }, 400); // refresh the configured/not-configured status shown
+    } catch(e) {
+      settingsMsg.textContent = "Save failed: " + e.message;
+      settingsMsg.className = "modal-msg err";
+    } finally {
+      saveKeysBtn.disabled = false; saveKeysBtn.textContent = "Save & reconnect";
+    }
+  });
+
+  // ---------------- live clock ----------------
+  function pad(n){ return n<10 ? "0"+n : n; }
+  function tickClock(){
+    const d = new Date();
+    const el = document.getElementById("snapClock");
+    if(el) el.textContent = pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds())+" local";
+  }
+  tickClock(); setInterval(tickClock, 1000);
+
+  // ---------------- running news ticker (unlocated news, newest first, bottom->top) ----------------
+  function ts(it){ const d = parseItemDate(it.date); return d ? d.getTime() : 0; }
+  function wireTickerPause(){
+    const viewport = document.getElementById("tickerViewport");
+    const track = document.getElementById("tickerTrack");
+    if(!viewport || !track) return;
+    viewport.onpointerenter = function(){ track.classList.add("paused"); };
+    viewport.onpointerleave = function(){ track.classList.remove("paused"); };
+    viewport.ontouchstart = function(){ track.classList.add("paused"); };
+    viewport.ontouchend = function(){ track.classList.remove("paused"); };
+  }
+  function in72h(it){
+    const d = parseItemDate(it.date);
+    if(!d) return false;                       // undated background items never qualify as "latest news"
+    return (Date.now() - d.getTime()) <= 72 * 3600 * 1000;
+  }
+  function renderTicker(view){
+    // The running feed is ALWAYS the last 72 hours - it ignores the All-Time toggle.
+    const track = document.getElementById("tickerTrack");
+    const cnt = document.getElementById("count-ticker");
+    if(!track) return;
+    const src = (currentData && currentData.items_by_category) || {};
+    const all = [];
+    Object.keys(src).forEach(function(k){
+      (src[k] || []).forEach(function(it){
+        if(!(typeof it.lat === "number" && typeof it.lon === "number") && in72h(it)) all.push(it);
+      });
+    });
+    all.sort(function(a, b){ return ts(b) - ts(a); });
+    const list = all.slice(0, 80);
+    if(cnt) cnt.textContent = list.length + " in 72h";
+    if(!list.length){
+      track.innerHTML = '<div class="empty-note" style="padding:14px;">No unlocated news in the last 72 hours yet.</div>';
+      return;
+    }
+    const TAG = {geo:["GEO","var(--green)"], milops:["MIL","var(--amber)"], arms:["ARMS","var(--magenta)"],
+      naval:["NAVAL","var(--cyan-h)"], scs:["SCS","var(--cyan-h)"], air:["AIR","var(--violet)"], space:["SPACE","var(--cyan-h)"],
+      tech:["TECH","var(--gold)"], cyber:["CYBER","var(--red)"], darkweb:["DARK","var(--red)"], econ:["ECON","var(--cyan-h)"],
+      mss:["MSS","var(--amber)"], social:["SOC","var(--gold)"], wellbeing:["WELL","var(--magenta)"], hazard:["HAZ","var(--violet)"]};
+    const one = list.map(function(it){
+      const t = TAG[it.category] || ["NEWS","var(--cyan-h)"];
+      return '<div class="tick-item"><span class="tag" style="background:'+t[1]+'">'+t[0]+'</span>' +
+        '<span class="txt">'+escapeHtml(it.label)+'</span>' +
+        '<div class="meta">'+escapeHtml(it.source)+(it.date ? ' &middot; '+escapeHtml(fmtDate(it.date)) : '')+'</div></div>';
+    }).join("");
+    track.innerHTML = one + one;
+    wireTickerPause();
+  }
+
+  function renderDarkWeb(view){
+    const el = document.getElementById("items-darkweb");
+    if(!el) return;
+    const want = document.getElementById("darkwebFilter").value;
+    const all = [];
+    Object.keys(view.items_by_category || {}).forEach(function(k){
+      (view.items_by_category[k] || []).forEach(function(it){
+        if(it.category === "darkweb") all.push(it);
+      });
+    });
+    all.sort(function(a, b){ return ts(b) - ts(a); });
+    const shown = all.filter(function(it){ return want === "all" || it.in_region; }).slice(0, 80);
+    document.getElementById("count-darkweb").textContent = shown.length + " of " + all.length;
+    const LABEL = {ransomware_live:"Ransomware.live: ", telegram_public:"Telegram: ", darkweb_tor:"Dark web via Tor: "};
+    const st = (view.connector_status || []).filter(function(s){ return LABEL[s.name]; })
+      .map(function(s){ return LABEL[s.name] + s.message; });
+    document.getElementById("darkwebStatus").textContent = st.join("   |   ");
+    el.innerHTML = shown.length ? shown.map(function(it){
+      const href = safeUrl(it.url);
+      return '<div class="item"><div class="lbl">'+escapeHtml(it.label)+'</div><div class="meta">' +
+        escapeHtml(it.source) + (it.country ? ' &middot; '+escapeHtml(it.country) : '') +
+        (it.date ? ' &middot; '+escapeHtml(fmtDate(it.date)) : '') +
+        (href ? ' &middot; <a href="'+escapeHtml(href)+'" target="_blank" rel="noopener noreferrer">source &#8599;</a>' : '') +
+        '</div></div>';
+    }).join("") : '<div class="empty-note">No dark-web or threat-intel claims in the current window. ' +
+        (timeWindow === "72h" ? 'Switch to All Time (top right) to see older claims.' : '') + '</div>';
+  }
+
+  // ---------------- radar sweep: 2D scanner rotating over the map (off for reduced-motion) ----------------
+  // Cosmetic only, so it is isolated: a missing animation API or any error here
+  // must never stop the data panels from rendering. Falls back to a timer when
+  // requestAnimationFrame is unavailable (older or embedded browsers).
+  try {
+    (function radar(){
+      const g = document.getElementById("radarSweep");
+      if(!g || (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+      const cx = g.getAttribute("data-cx"), cy = g.getAttribute("data-cy");
+      const raf = (typeof window.requestAnimationFrame === "function")
+        ? function(f){ window.requestAnimationFrame(f); }
+        : function(f){ setTimeout(f, 33); };
+      let a = 0;
+      (function step(){
+        a = (a + 0.5) % 360;
+        g.setAttribute("transform", "rotate(" + a + " " + cx + " " + cy + ")");
+        raf(step);
+      })();
+    })();
+  } catch(e) { /* sweep is decoration; the dashboard works without it */ }
+
+  const dwFilter = document.getElementById("darkwebFilter");
+  if(dwFilter) dwFilter.addEventListener("change", function(){ if(currentData) render(currentData, isLive, null); });
+
+  // ---------------- 72h / All-time toggle ----------------
+  document.querySelectorAll(".wt-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      timeWindow = btn.dataset.window;
+      document.querySelectorAll(".wt-btn").forEach(b => b.classList.toggle("active", b === btn));
+      // re-render from what we already have - no new network call needed
+      if(currentData) render(currentData, isLive, null);
+    });
+  });
+
+  // ---------------- Plot a location (lat/long + remark) ----------------
+  const plotBackdrop = document.getElementById("plotBackdrop");
+  const plotMsg = document.getElementById("plotMsg");
+
+  async function loadCustomMarkers(){
+    try {
+      const res = await fetch("/api/custom-markers", {cache:"no-store"});
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      customMarkers = (await res.json()).markers || [];
+    } catch(e) { customMarkers = []; }
+  }
+
+  function renderCustomList(){
+    const el = document.getElementById("customMarkersList");
+    if(!customMarkers.length){ el.innerHTML = ""; return; }
+    el.innerHTML = '<div style="font-size:11px;color:var(--text-faint);margin-bottom:6px;">Your plotted markers:</div>' +
+      customMarkers.map(function(m, i){
+        return '<div class="custom-marker-row"><span><b>'+escapeHtml(m.label)+'</b> ('+m.lat+', '+m.lon+')' +
+          (m.remark ? '<br/><span style="color:var(--text-faint);">'+escapeHtml(m.remark)+'</span>' : '') +
+          '</span><button data-idx="'+i+'" title="Remove">&times;</button></div>';
+      }).join("");
+    el.querySelectorAll("button[data-idx]").forEach(function(btn){
+      btn.addEventListener("click", async function(){
+        try {
+          const res = await fetch("/api/custom-markers/" + btn.dataset.idx, {method:"DELETE"});
+          const j = await res.json();
+          if(!res.ok) throw new Error(j.error || ("HTTP " + res.status));
+          customMarkers = j.markers || [];
+          renderCustomList();
+          if(currentData) render(currentData, isLive, null);
+        } catch(e) {
+          plotMsg.textContent = "Remove failed: " + e.message; plotMsg.className = "modal-msg err";
+        }
+      });
+    });
+  }
+
+  const plotBtn = document.getElementById("plotBtn");
+  if(plotBtn) plotBtn.addEventListener("click", async function(){
+    plotBackdrop.classList.add("show");
+    plotMsg.textContent = ""; plotMsg.className = "modal-msg";
+    await loadCustomMarkers();
+    renderCustomList();
+  });
+  document.getElementById("plotCloseBtn").addEventListener("click", () => plotBackdrop.classList.remove("show"));
+  plotBackdrop.addEventListener("click", function(e){ if(e.target === plotBackdrop) plotBackdrop.classList.remove("show"); });
+
+  document.getElementById("plotAddBtn").addEventListener("click", async function(){
+    const label = document.getElementById("plotLabel").value.trim();
+    const remark = document.getElementById("plotRemark").value.trim();
+    const lat = parseFloat(document.getElementById("plotLat").value);
+    const lon = parseFloat(document.getElementById("plotLon").value);
+    if(!label || isNaN(lat) || isNaN(lon) || lat < -90 || lat > 90 || lon < -180 || lon > 180){
+      plotMsg.textContent = "Enter a label and valid lat (-90 to 90) / lon (-180 to 180)."; plotMsg.className = "modal-msg err";
+      return;
+    }
+    try {
+      const res = await fetch("/api/custom-markers", {method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({label: label, remark: remark, lat: lat, lon: lon})});
+      const j = await res.json();
+      if(!res.ok) throw new Error(j.error || ("HTTP " + res.status));
+      customMarkers = j.markers || [];
+      ["plotLabel","plotRemark","plotLat","plotLon"].forEach(id => document.getElementById(id).value = "");
+      plotMsg.textContent = "Added."; plotMsg.className = "modal-msg ok";
+      renderCustomList();
+      if(currentData) render(currentData, isLive, null);
+    } catch(e) {
+      plotMsg.textContent = "Add failed: " + e.message; plotMsg.className = "modal-msg err";
+    }
+  });
+
+  // ---------------- boot ----------------
+  loadCustomMarkers().then(function(){ loadData(false); });
+  // auto-update news & data every 3 minutes, per request
+  refreshTimer = setInterval(function(){ loadData(false); }, 3*60*1000);
+
+  // Test hooks (harmless in production) so the DOM regression test can drive
+  // the real code paths instead of re-implementing them
+  window.__TEST = {render: function(){ if(currentData) render(currentData, isLive, null); },
+                   setData: function(d){ currentData = d; isLive = true; },
+                   setWindow: function(w){ timeWindow = w; },
+                   parseItemDate: parseItemDate, inWindow: inWindow};
+})();

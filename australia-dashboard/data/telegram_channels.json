@@ -1,0 +1,21 @@
+{
+  "_note": "Public Telegram channels read via t.me/s/<name> (no account needed). Groups: news, osint, defence, cyber, darkweb. verified:false = listed from research, not confirmed live by this build; its status line shows whether it answers. Excluded on purpose: OffensiveTwitter (offensive-security and exploit content) and HaveIBeenPwnedBreaches (channels of this type can carry raw breach records; use the official haveibeenpwned.com service instead).",
+  "channels": [
+    {"handle": "ReutersWorldChannel", "group": "news", "verified": false},
+    {"handle": "nytimes", "group": "news", "verified": false},
+    {"handle": "guardian", "group": "news", "verified": false},
+    {"handle": "bloomberg", "group": "news", "verified": false},
+    {"handle": "south_china_morning_post", "group": "news", "verified": false},
+    {"handle": "SCMP_News", "group": "news", "verified": false},
+    {"handle": "insiderpaper", "group": "news", "verified": false},
+    {"handle": "DefenseBlog", "group": "defence", "verified": false},
+    {"handle": "OsintTVNews", "group": "osint", "verified": false},
+    {"handle": "OSINTdefender", "group": "osint", "verified": false},
+    {"handle": "ClashReport", "group": "osint", "verified": false},
+    {"handle": "war_noir", "group": "osint", "verified": false},
+    {"handle": "Middle_East_Spectator", "group": "osint", "verified": false},
+    {"handle": "BlueTeamKit", "group": "cyber", "verified": false},
+    {"handle": "IRCyberGuardians", "group": "cyber", "verified": false},
+    {"handle": "DarkfeedNews", "group": "darkweb", "verified": false}
+  ]
+}
