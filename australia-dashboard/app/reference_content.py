@@ -108,6 +108,6 @@ REFERENCE_ITEMS = [
      "text": "The annual report ranks countries for wellbeing. The ranks for the countries in this frame were not verified in this build; check the report directly.",
      "source": "World Happiness Report (annual); not verified in this build", "date": "Mar 2026", "url": None, "connector": "reference"},
     {"category": "darkweb", "label": "Ransomware claims for the region are group claims, not confirmed victims",
-     "text": "The Ransomware.live feed filtered to the region's country codes lists claims made by groups on their own leak sites. Each claim is labelled unverified.",
+     "text": "The Ransomware.live feed filtered to the region's country codes lists claims made by groups on their own leak sites. The feed lists group claims, not confirmed victims.",
      "source": "Ransomware.live (v2 feed)", "date": "live", "url": None, "connector": "reference"},
 ]

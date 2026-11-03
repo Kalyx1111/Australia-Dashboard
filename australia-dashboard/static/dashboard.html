@@ -299,6 +299,40 @@ a{color:inherit;}
 .dw-status{font-family:var(--mono);font-size:10px;color:var(--text-faint);margin:-4px 0 10px;}
 @media (max-width:1180px){.main-grid{grid-template-columns:1fr;}}
 @media (prefers-reduced-motion: reduce){.ticker-track,.live-dot{animation:none !important;}}
+
+.map-body{display:block;position:relative;}
+.map-svg-wrap{position:relative;width:100%;height:calc(100vh - 210px);min-height:520px;}
+.map-svg-wrap svg{width:100%;height:100%;display:block;}
+.layers-panel{position:absolute;top:10px;left:10px;width:236px;max-height:calc(100% - 20px);overflow:auto;z-index:8;display:none;background:rgba(7,10,16,.95);box-shadow:0 10px 30px rgba(0,0,0,.6);}
+.map-body.layers-open .layers-panel{display:flex;}
+.tk-btn{background:var(--panel2,#111a2b);color:var(--text,#d7e2f0);border:1px solid var(--border,#1e2a3d);border-radius:6px;padding:4px 10px;font-family:var(--mono,monospace);font-size:10.5px;letter-spacing:.04em;cursor:pointer;flex:none;}
+.tk-btn:hover{border-color:var(--cyan-h,#22d3ee);color:var(--cyan-h,#22d3ee);}
+.ticker-hd .tk-btn{margin-left:auto;}
+.ticker-hd .tk-btn + .tk-btn{margin-left:6px;}
+.ticker-panel{position:sticky;top:12px;height:calc(100vh - 24px);align-self:start;}
+.ticker-viewport{min-height:0;}
+.main-grid{transition:grid-template-columns .25s ease;}
+.main-grid.news-closed{grid-template-columns:minmax(0,1fr) 0px;gap:0;}
+.main-grid.news-closed .ticker-panel{display:none;}
+.main-grid.news-open .news-tab{display:none;}
+.news-tab{position:fixed;right:0;top:40%;z-index:30;writing-mode:vertical-rl;transform:rotate(180deg);background:var(--panel,#0c1220);color:var(--cyan-h,#22d3ee);border:1px solid var(--border,#1e2a3d);border-right:none;border-radius:0 8px 8px 0;padding:14px 9px;font-family:var(--mono,monospace);font-size:11px;letter-spacing:.14em;cursor:pointer;box-shadow:-6px 0 18px rgba(0,0,0,.45);}
+.news-tab:hover{background:var(--panel2,#111a2b);}
+@media (max-width:1180px){.main-grid.news-closed{grid-template-columns:1fr;}}
+
+/* Screen layout controls (v1.7): Full map, Full screen, Hide bars. Plain CSS, no script. */
+:root{--map-top:120px;}
+.map-tools{position:absolute;top:10px;right:10px;z-index:9;display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:6px;max-width:calc(100% - 20px);padding:6px 8px;background:rgba(7,10,16,.88);border:1px solid var(--border-soft,#1e2b3d);border-radius:8px;}
+.map-tools .hide-delay{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--text-dim,#8fa3bf);white-space:nowrap;}
+.map-tools select{background:#0a131c;color:#dce8f2;border:1px solid #2a4a66;border-radius:6px;padding:4px 6px;font:inherit;font-size:11px;}
+.map-tools .tk-btn[aria-pressed="true"]{border-color:var(--gold-soft,#c9a24a);color:var(--text,#e6edf7);}
+.map-tools button:focus-visible,.map-tools select:focus-visible{outline:2px solid var(--cyan-h,#22d3ee);outline-offset:2px;}
+body.full-map #kpiRow,body.full-map .map-panel>.panel-hd,body.full-map .news-tab,body.full-map .ticker-panel,body.full-map .layers-panel,body.full-map .dash-footer{display:none !important;}
+body.full-map .left-col>:not(.map-panel),body.full-map .main-grid>:not(.left-col){display:none !important;}
+body.full-map .main-grid{grid-template-columns:minmax(0,1fr) 0px !important;gap:0 !important;}
+body.full-map .map-svg-wrap,body.bars-idle .map-svg-wrap{height:calc(100vh - var(--map-top,120px) - 24px) !important;min-height:360px !important;}
+body.full-map .wrap,body.bars-idle .wrap{padding-bottom:0;}
+body.bars-idle .hdr{padding:8px 6px 6px;}
+body.bars-idle .hdr .search-wrap,body.bars-idle .hdr .hdr-right,body.bars-idle #kpiRow,body.bars-idle .map-panel>.panel-hd,body.bars-idle .news-tab,body.bars-idle .map-tools,body.bars-idle .zoom-ctrl,body.bars-idle .dash-footer{display:none !important;}
 .disputed-outline{fill:rgba(240,180,41,0.12);stroke:#f0b429;stroke-width:1.4;stroke-dasharray:4 3;}
 .state-line{fill:none;stroke:#8fb3d9;stroke-width:0.9;stroke-opacity:0.85;}
 .state-label{fill:#cfe3f5;font-size:11px;text-anchor:middle;paint-order:stroke;stroke:#0a0e17;stroke-width:3px;}
@@ -344,7 +378,7 @@ a{color:inherit;}
   <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="1.6"/>
 </svg></button>
     <button class="refresh-btn" id="refreshBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-  <path d="M21 12a9 9 0 11-2.6-6.4M21 4v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Refresh</span></button>
+  <path d="M21 12a9 9 0 11-2.6-6.4M21 4v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Refresh</span></button><button class="refresh-btn" id="updateBtn" type="button" title="Fetch the latest public data for this dashboard's permanent layers"><span>Update data</span></button><span id="updateStatus" style="font-family:monospace;font-size:10.5px;color:#8fa3bf;margin-left:8px;"></span>
     <div class="hdr-clock"><b id="snapClock">&mdash;</b><span id="snapDate">&nbsp;</span></div>
   </div>
 </header>
@@ -389,13 +423,18 @@ a{color:inherit;}
   <div class="kpi" style="--accent:var(--violet)"><div class="eyebrow">Hazard alerts</div><div class="num" id="kpi-hazard">&hellip;</div><div class="sub">current items in feed</div></div>
   <div class="kpi" style="--accent:var(--red)"><div class="eyebrow">Dark-web claims (region)</div><div class="num" id="kpi-darkweb">&hellip;</div><div class="sub">leak-site, Telegram and Tor sources</div></div>
 </div>
-  <div class="main-grid">
+  <div class="main-grid news-closed" id="mainGrid">
     <div class="left-col">
   <div class="map-panel">
   <div class="panel-hd"><span class="panel-dot" style="background:var(--gold);color:var(--gold)"></span>
     <span class="panel-title">Tactical Map &mdash; Australia, New Zealand and the Pacific</span>
-    <span class="panel-count" id="count-markers">&hellip;</span></div>
-  <div class="map-body">
+    <span class="panel-count" id="count-markers">&hellip;</span><button class="tk-btn" id="layersBtn" type="button" aria-expanded="false" style="margin-left:auto">Layers</button></div>
+  <div class="map-body" id="mapBody">
+    <div class="map-tools" id="mapTools" role="group" aria-label="Screen layout">
+      <button class="tk-btn" id="btnFullMap" type="button" aria-pressed="false">Full map</button>
+      <button class="tk-btn" id="btnFullScreen" type="button" aria-pressed="false">Full screen</button>
+      <label class="hide-delay">Hide bars <select id="selHideBars" aria-label="Seconds before the bars hide"><option value="3">3 s</option><option value="4" selected>4 s</option><option value="5">5 s</option><option value="0">Never</option></select></label>
+    </div>
     <div class="map-svg-wrap" id="mapWrap"><svg viewBox="0 0 1300 1043" xmlns="http://www.w3.org/2000/svg" id="mapSvg" role="img" aria-label="Tactical map of Australia, New Zealand and the Pacific">
   <defs>
     <linearGradient id="sweepGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#c9a35c" stop-opacity="0.38"/><stop offset="100%" stop-color="#c9a35c" stop-opacity="0"/></linearGradient>
@@ -709,7 +748,7 @@ a{color:inherit;}
   <g class="markers" id="markerLayer"></g>
 </svg><div class="map-tip" id="mapTip"></div></div>
     <div class="layers-panel">
-      <div class="layers-hd">LAYERS</div>
+      <div class="layers-hd" style="display:flex;align-items:center;justify-content:space-between;">LAYERS <button class="tk-btn" id="layersClose" type="button">Close</button></div>
       <label class="layer-toggle"><input type="checkbox" class="layer-cb" data-layer="capital" checked/><i style="background:#c9a35c"></i>Capital or territorial capital</label>
 <label class="layer-toggle"><input type="checkbox" class="layer-cb" data-layer="foreign_base" checked/><i style="background:#3b82f6"></i>Allied or joint base (US, UK, France) or base with foreign access</label>
 <label class="layer-toggle"><input type="checkbox" class="layer-cb" data-layer="navy_base" checked/><i style="background:#f97316"></i>Navy base or fleet headquarters</label>
@@ -818,11 +857,12 @@ a{color:inherit;}
 </div>
     <aside class="ticker-panel">
   <div class="ticker-hd"><span class="live-dot"></span><span class="panel-title">Latest News (running)</span>
-    <span class="panel-count" id="count-ticker">&hellip;</span></div>
+    <span class="panel-count" id="count-ticker">&hellip;</span><button class="tk-btn" id="tickerPause" type="button" aria-pressed="false">Pause</button><button class="tk-btn" id="newsHide" type="button">Hide &#9656;</button></div>
   <div class="ticker-viewport" id="tickerViewport"><div class="ticker-track" id="tickerTrack">
     <div class="skel" style="height:60px;margin:10px;"></div></div></div>
-  <div class="ticker-ftr">Hover to pause &middot; moves bottom&rarr;top &middot; unlocated news only (located news is on the map)</div>
+  <div class="ticker-ftr">Pause or resume with the button &middot; moves bottom&rarr;top &middot; unlocated news only (located news is on the map)</div>
 </aside>
+<button class="news-tab" id="newsTab" type="button" aria-expanded="false" title="Show the latest news">&#9664; LATEST NEWS</button>
   </div>
   <div class="dash-footer">
   <div><span class="brandline">AUSTRALIA Dashboard</span> &middot; By Aryan &middot; @EPureNest</div>
@@ -830,5 +870,6 @@ a{color:inherit;}
 </div>
 </div>
 <script src="/static/dashboard.js"></script>
+<script src="/static/layout.js" defer></script>
 </body>
 </html>

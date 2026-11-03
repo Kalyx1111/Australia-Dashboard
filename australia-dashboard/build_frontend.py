@@ -114,7 +114,43 @@ EXTRA_CSS += '''
 @media (max-width:1180px){.main-grid{grid-template-columns:1fr;}}
 @media (prefers-reduced-motion: reduce){.ticker-track,.live-dot{animation:none !important;}}
 '''
-CSS = old_css + EXTRA_CSS + ".disputed-outline{fill:rgba(240,180,41,0.12);stroke:#f0b429;stroke-width:1.4;stroke-dasharray:4 3;}\n.state-line{fill:none;stroke:#8fb3d9;stroke-width:0.9;stroke-opacity:0.85;}\n.state-label{fill:#cfe3f5;font-size:11px;text-anchor:middle;paint-order:stroke;stroke:#0a0e17;stroke-width:3px;}\n.sea-label{fill:#7fb3d5;font-size:14px;font-style:italic;letter-spacing:.08em;text-anchor:middle;}\n.river-line{fill:none;stroke:#3f7fbf;stroke-width:1.3;stroke-opacity:0.85;}\n.place-dot{fill:#e8eef7;}\n.place-label{fill:#e8eef7;font-size:11px;paint-order:stroke;stroke:#0a0e17;stroke-width:3px;}\n.state-line.ne{fill:rgba(96,165,250,0.10);stroke:#7fb8ff;stroke-width:1.4;}\n.state-line.margin{stroke-dasharray:6 4;stroke:#64748b;fill:none;}\n.country.focus{fill:#1d3a5c;}\n\n"
+LAYOUT_CSS = '''
+.map-body{display:block;position:relative;}
+.map-svg-wrap{position:relative;width:100%;height:calc(100vh - 210px);min-height:520px;}
+.map-svg-wrap svg{width:100%;height:100%;display:block;}
+.layers-panel{position:absolute;top:10px;left:10px;width:236px;max-height:calc(100% - 20px);overflow:auto;z-index:8;display:none;background:rgba(7,10,16,.95);box-shadow:0 10px 30px rgba(0,0,0,.6);}
+.map-body.layers-open .layers-panel{display:flex;}
+.tk-btn{background:var(--panel2,#111a2b);color:var(--text,#d7e2f0);border:1px solid var(--border,#1e2a3d);border-radius:6px;padding:4px 10px;font-family:var(--mono,monospace);font-size:10.5px;letter-spacing:.04em;cursor:pointer;flex:none;}
+.tk-btn:hover{border-color:var(--cyan-h,#22d3ee);color:var(--cyan-h,#22d3ee);}
+.ticker-hd .tk-btn{margin-left:auto;}
+.ticker-hd .tk-btn + .tk-btn{margin-left:6px;}
+.ticker-panel{position:sticky;top:12px;height:calc(100vh - 24px);align-self:start;}
+.ticker-viewport{min-height:0;}
+.main-grid{transition:grid-template-columns .25s ease;}
+.main-grid.news-closed{grid-template-columns:minmax(0,1fr) 0px;gap:0;}
+.main-grid.news-closed .ticker-panel{display:none;}
+.main-grid.news-open .news-tab{display:none;}
+.news-tab{position:fixed;right:0;top:40%;z-index:30;writing-mode:vertical-rl;transform:rotate(180deg);background:var(--panel,#0c1220);color:var(--cyan-h,#22d3ee);border:1px solid var(--border,#1e2a3d);border-right:none;border-radius:0 8px 8px 0;padding:14px 9px;font-family:var(--mono,monospace);font-size:11px;letter-spacing:.14em;cursor:pointer;box-shadow:-6px 0 18px rgba(0,0,0,.45);}
+.news-tab:hover{background:var(--panel2,#111a2b);}
+@media (max-width:1180px){.main-grid.news-closed{grid-template-columns:1fr;}}
+'''
+LAYOUT_CONTROLS_CSS = """
+/* Screen layout controls (v1.7): Full map, Full screen, Hide bars. Plain CSS, no script. */
+:root{--map-top:120px;}
+.map-tools{position:absolute;top:10px;right:10px;z-index:9;display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:6px;max-width:calc(100% - 20px);padding:6px 8px;background:rgba(7,10,16,.88);border:1px solid var(--border-soft,#1e2b3d);border-radius:8px;}
+.map-tools .hide-delay{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--text-dim,#8fa3bf);white-space:nowrap;}
+.map-tools select{background:#0a131c;color:#dce8f2;border:1px solid #2a4a66;border-radius:6px;padding:4px 6px;font:inherit;font-size:11px;}
+.map-tools .tk-btn[aria-pressed="true"]{border-color:var(--gold-soft,#c9a24a);color:var(--text,#e6edf7);}
+.map-tools button:focus-visible,.map-tools select:focus-visible{outline:2px solid var(--cyan-h,#22d3ee);outline-offset:2px;}
+body.full-map #kpiRow,body.full-map .map-panel>.panel-hd,body.full-map .news-tab,body.full-map .ticker-panel,body.full-map .layers-panel,body.full-map .dash-footer{display:none !important;}
+body.full-map .left-col>:not(.map-panel),body.full-map .main-grid>:not(.left-col){display:none !important;}
+body.full-map .main-grid{grid-template-columns:minmax(0,1fr) 0px !important;gap:0 !important;}
+body.full-map .map-svg-wrap,body.bars-idle .map-svg-wrap{height:calc(100vh - var(--map-top,120px) - 24px) !important;min-height:360px !important;}
+body.full-map .wrap,body.bars-idle .wrap{padding-bottom:0;}
+body.bars-idle .hdr{padding:8px 6px 6px;}
+body.bars-idle .hdr .search-wrap,body.bars-idle .hdr .hdr-right,body.bars-idle #kpiRow,body.bars-idle .map-panel>.panel-hd,body.bars-idle .news-tab,body.bars-idle .map-tools,body.bars-idle .zoom-ctrl,body.bars-idle .dash-footer{display:none !important;}
+"""
+CSS = old_css + EXTRA_CSS + LAYOUT_CSS + LAYOUT_CONTROLS_CSS + ".disputed-outline{fill:rgba(240,180,41,0.12);stroke:#f0b429;stroke-width:1.4;stroke-dasharray:4 3;}\n.state-line{fill:none;stroke:#8fb3d9;stroke-width:0.9;stroke-opacity:0.85;}\n.state-label{fill:#cfe3f5;font-size:11px;text-anchor:middle;paint-order:stroke;stroke:#0a0e17;stroke-width:3px;}\n.sea-label{fill:#7fb3d5;font-size:14px;font-style:italic;letter-spacing:.08em;text-anchor:middle;}\n.river-line{fill:none;stroke:#3f7fbf;stroke-width:1.3;stroke-opacity:0.85;}\n.place-dot{fill:#e8eef7;}\n.place-label{fill:#e8eef7;font-size:11px;paint-order:stroke;stroke:#0a0e17;stroke-width:3px;}\n.state-line.ne{fill:rgba(96,165,250,0.10);stroke:#7fb8ff;stroke-width:1.4;}\n.state-line.margin{stroke-dasharray:6 4;stroke:#64748b;fill:none;}\n.country.focus{fill:#1d3a5c;}\n\n"
 
 # ---------- static map: country paths only (geography is not "live data") ----------
 R_SWEEP = 470
@@ -251,7 +287,7 @@ HEADER = f'''<header class="hdr">
     <span class="status-pill offline" id="statusPill"><span class="dot"></span><span id="statusPillText">Checking&hellip;</span></span>
     <button class="icon-btn" id="plotBtn" title="Plot a location on the map">{PLOT_ICON}</button>
     <button class="icon-btn" id="settingsBtn" title="API Keys">{GEAR_ICON}</button>
-    <button class="refresh-btn" id="refreshBtn">{REFRESH_ICON}<span>Refresh</span></button>
+    <button class="refresh-btn" id="refreshBtn">{REFRESH_ICON}<span>Refresh</span></button><button class="refresh-btn" id="updateBtn" type="button" title="Fetch the latest public data for this dashboard's permanent layers"><span>Update data</span></button><span id="updateStatus" style="font-family:monospace;font-size:10.5px;color:#8fa3bf;margin-left:8px;"></span>
     <div class="hdr-clock"><b id="snapClock">&mdash;</b><span id="snapDate">&nbsp;</span></div>
   </div>
 </header>
@@ -336,11 +372,16 @@ infra_toggles_html = "\n".join(
 MAP_PANEL = f'''<div class="map-panel">
   <div class="panel-hd"><span class="panel-dot" style="background:var(--gold);color:var(--gold)"></span>
     <span class="panel-title">Tactical Map &mdash; Australia, New Zealand and the Pacific</span>
-    <span class="panel-count" id="count-markers">&hellip;</span></div>
-  <div class="map-body">
+    <span class="panel-count" id="count-markers">&hellip;</span><button class="tk-btn" id="layersBtn" type="button" aria-expanded="false" style="margin-left:auto">Layers</button></div>
+  <div class="map-body" id="mapBody">
+    <div class="map-tools" id="mapTools" role="group" aria-label="Screen layout">
+      <button class="tk-btn" id="btnFullMap" type="button" aria-pressed="false">Full map</button>
+      <button class="tk-btn" id="btnFullScreen" type="button" aria-pressed="false">Full screen</button>
+      <label class="hide-delay">Hide bars <select id="selHideBars" aria-label="Seconds before the bars hide"><option value="3">3 s</option><option value="4" selected>4 s</option><option value="5">5 s</option><option value="0">Never</option></select></label>
+    </div>
     <div class="map-svg-wrap" id="mapWrap">{MAP_SVG}<div class="map-tip" id="mapTip"></div></div>
     <div class="layers-panel">
-      <div class="layers-hd">LAYERS</div>
+      <div class="layers-hd" style="display:flex;align-items:center;justify-content:space-between;">LAYERS <button class="tk-btn" id="layersClose" type="button">Close</button></div>
       {layer_toggles_html}
       <div class="layers-hd" style="margin-top:8px;">INFRASTRUCTURE</div>
       {infra_toggles_html}
@@ -352,11 +393,12 @@ MAP_PANEL = f'''<div class="map-panel">
 
 TICKER_HTML = '''<aside class="ticker-panel">
   <div class="ticker-hd"><span class="live-dot"></span><span class="panel-title">Latest News (running)</span>
-    <span class="panel-count" id="count-ticker">&hellip;</span></div>
+    <span class="panel-count" id="count-ticker">&hellip;</span><button class="tk-btn" id="tickerPause" type="button" aria-pressed="false">Pause</button><button class="tk-btn" id="newsHide" type="button">Hide &#9656;</button></div>
   <div class="ticker-viewport" id="tickerViewport"><div class="ticker-track" id="tickerTrack">
     <div class="skel" style="height:60px;margin:10px;"></div></div></div>
-  <div class="ticker-ftr">Hover to pause &middot; moves bottom&rarr;top &middot; unlocated news only (located news is on the map)</div>
-</aside>'''
+  <div class="ticker-ftr">Pause or resume with the button &middot; moves bottom&rarr;top &middot; unlocated news only (located news is on the map)</div>
+</aside>
+<button class="news-tab" id="newsTab" type="button" aria-expanded="false" title="Show the latest news">&#9664; LATEST NEWS</button>'''
 
 DARKWEB_PANEL = '''<div class="panel darkweb-panel">
   <div class="panel-hd"><span class="panel-dot" style="background:var(--red);color:var(--red)"></span>
@@ -882,13 +924,33 @@ SCRIPT = r"""
   // ---------------- running news ticker (unlocated news, newest first, bottom->top) ----------------
   function ts(it){ const d = parseItemDate(it.date); return d ? d.getTime() : 0; }
   function wireTickerPause(){
-    const viewport = document.getElementById("tickerViewport");
-    const track = document.getElementById("tickerTrack");
-    if(!viewport || !track) return;
-    viewport.onpointerenter = function(){ track.classList.add("paused"); };
-    viewport.onpointerleave = function(){ track.classList.remove("paused"); };
-    viewport.ontouchstart = function(){ track.classList.add("paused"); };
-    viewport.ontouchend = function(){ track.classList.remove("paused"); };
+    const btn = document.getElementById("tickerPause"), track = document.getElementById("tickerTrack");
+    const grid = document.getElementById("mainGrid"), tab = document.getElementById("newsTab"), hide = document.getElementById("newsHide");
+    const lb = document.getElementById("layersBtn"), lc = document.getElementById("layersClose"), mb = document.getElementById("mapBody");
+    if(btn && track && !btn.dataset.wired){
+      btn.dataset.wired = "1";
+      btn.addEventListener("click", function(){
+        const paused = track.classList.toggle("paused");
+        btn.textContent = paused ? "Resume" : "Pause";
+        btn.setAttribute("aria-pressed", String(paused));
+      });
+    }
+    function setNews(open){
+      if(!grid) return;
+      grid.classList.toggle("news-open", open);
+      grid.classList.toggle("news-closed", !open);
+      if(tab) tab.setAttribute("aria-expanded", String(open));
+    }
+    if(tab && !tab.dataset.wired){ tab.dataset.wired = "1"; tab.addEventListener("click", function(){ setNews(true); }); }
+    if(hide && !hide.dataset.wired){ hide.dataset.wired = "1"; hide.addEventListener("click", function(){ setNews(false); }); }
+    if(lb && mb && !lb.dataset.wired){
+      lb.dataset.wired = "1";
+      lb.addEventListener("click", function(){ lb.setAttribute("aria-expanded", String(mb.classList.toggle("layers-open"))); });
+    }
+    if(lc && mb && !lc.dataset.wired){
+      lc.dataset.wired = "1";
+      lc.addEventListener("click", function(){ mb.classList.remove("layers-open"); if(lb) lb.setAttribute("aria-expanded", "false"); });
+    }
   }
   function in72h(it){
     const d = parseItemDate(it.date);
@@ -1061,7 +1123,49 @@ SCRIPT = r"""
     }
   });
 
+  // ---------------- permanent-data updates: the Update data button, its status line and the weekly schedule ----------------
+  function describeUpdate(s){
+    if(!s) return "";
+    if(s.running) return "Updating permanent data... this can take a few minutes";
+    if(!s.last_run) return "No update yet. Automatic updates run every " + (s.update_every_days || 7) + " days while the dashboard is open";
+    const last = new Date(s.last_run);
+    const next = s.next_run ? new Date(s.next_run) : null;
+    let text = "Data updated " + (isNaN(last) ? s.last_run : last.toLocaleString());
+    if(next && !isNaN(next)) text += " · next automatic update " + next.toLocaleString();
+    return text;
+  }
+  async function refreshUpdateStatus(){
+    const el = document.getElementById("updateStatus");
+    try{
+      const r = await fetch("/api/update/status", {cache: "no-store"});
+      const s = await r.json();
+      if(el) el.textContent = describeUpdate(s);
+      return s;
+    }catch(e){ if(el) el.textContent = "Update status unavailable"; return null; }
+  }
+  async function startDataUpdate(){
+    const btn = document.getElementById("updateBtn");
+    if(btn) btn.disabled = true;
+    try{
+      await fetch("/api/update/run", {method: "POST"});
+      for(let i = 0; i < 900; i++){
+        await new Promise(function(res){ setTimeout(res, 2000); });
+        const s = await refreshUpdateStatus();
+        if(!s || !s.running) break;
+      }
+      await loadData(true);
+    }catch(e){ const el = document.getElementById("updateStatus"); if(el) el.textContent = "Update could not start"; }
+    finally{ if(btn) btn.disabled = false; }
+  }
+  function wireDataUpdate(){
+    const btn = document.getElementById("updateBtn");
+    if(btn && !btn.dataset.wired){ btn.dataset.wired = "1"; btn.addEventListener("click", startDataUpdate); }
+    refreshUpdateStatus();
+  }
+
   // ---------------- boot ----------------
+  wireTickerPause();   // the news drawer and its controls work from the first moment, even before any news arrives
+  wireDataUpdate();
   loadCustomMarkers().then(function(){ loadData(false); });
   // auto-update news & data every 3 minutes, per request
   refreshTimer = setInterval(function(){ loadData(false); }, 3*60*1000);
@@ -1094,13 +1198,14 @@ PAGE = '''<!DOCTYPE html>
 <div class="wrap">
   {header}
   {kpi}
-  <div class="main-grid">
+  <div class="main-grid news-closed" id="mainGrid">
     {left}
     {ticker}
   </div>
   {footer}
 </div>
 <script src="/static/dashboard.js"></script>
+<script src="/static/layout.js" defer></script>
 </body>
 </html>'''.format(css=CSS, header=HEADER, kpi=KPI_ROW, left=LEFT_COL, ticker=TICKER_HTML, footer=FOOTER)
 

@@ -43,6 +43,10 @@ if errorlevel 1 (
 echo [OK] Dependencies ready.
 echo.
 
+echo Creating the desktop and Start menu shortcuts...
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0make_shortcuts.ps1"
+echo.
+
 start "AUSTRALIA DASHBOARD - SERVER (auto-restart on crash)" cmd /k "cd /d ""%~dp0"" && venv\Scripts\python.exe supervisor.py"
 
 echo Waiting for the server on port 8830...

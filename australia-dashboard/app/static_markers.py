@@ -253,3 +253,10 @@ if os.path.exists(_REUSED):
 for _m in MARKERS:
     if _m["id"] == "cap_jakarta":
         _m["aliases"] = ["jakarta"]
+
+# India rule (shared guard): nothing is plotted inside India's survey outline.
+try:
+    from .india_guard import clean_points as _india_points
+except ImportError:  # run as a plain script
+    from india_guard import clean_points as _india_points
+MARKERS = _india_points(MARKERS)

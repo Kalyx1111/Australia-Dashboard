@@ -222,3 +222,19 @@ def delete_custom_marker(idx):
         cache.write(data, "custom_markers.json")
         return jsonify(data)
     return jsonify({"error": "index out of range"}), 404
+
+
+# permanent-data updates: the Update data button and its status
+from . import updates as _updates  # noqa: E402
+
+
+@app.get("/api/update/status")
+def api_update_status():
+    return jsonify(_updates.status())
+
+
+@app.post("/api/update/run")
+def api_update_run():
+    if not _updates.start_background("dashboard button"):
+        return jsonify({"error": "an update is already running"}), 409
+    return jsonify(_updates.status()), 202

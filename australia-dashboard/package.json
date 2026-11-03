@@ -1,5 +1,9 @@
 {
   "name": "australia-dashboard",
-  "devDependencies": { "jsdom": "^30.0.1" },
-  "scripts": { "test": "node tests/dom_window_test.js && node tests/dom_xss_test.js && node tests/dom_panels_test.js" }
+  "devDependencies": {
+    "jsdom": "^30.0.1"
+  },
+  "scripts": {
+    "test": "node tests/dom_drawer_test.js && node tests/dom_panels_test.js && node tests/dom_window_test.js && node tests/dom_xss_test.js && node tests/dom_layout_test.js"
+  }
 }

@@ -26,5 +26,10 @@ if __name__ == "__main__":
     # about), and specifically chosen because - unlike gunicorn - it runs on
     # Windows. supervisor.py is what gives you crash recovery; this process
     # exiting (for any reason) is exactly the signal it restarts on.
+    from app import updates as _updates  # noqa: E402
+    if "--update-now" in sys.argv:
+        print(_updates.run_update("command line")["summary"])
+        sys.exit(0)
+    _updates.start_scheduler()
     from waitress import serve
     serve(app, host="127.0.0.1", port=8830, threads=4)
